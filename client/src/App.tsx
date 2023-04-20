@@ -10,7 +10,6 @@ import MainPage from './components/Pages/MainPage';
 import SignupPage from './components/Pages/SignupPage';
 import Navbar from './components/UI/Navbar';
 
-
 export default function App(): JSX.Element {
   return (
     <div>
