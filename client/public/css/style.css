@@ -22,8 +22,8 @@ body {
   opacity: 0.8;
   font-size: 30px;
   text-align: center;
-  color: #C0C5CD
-  /* color: 192 197 295 100; */
+  color: #c0c5cd;
+  flex-direction: column;
 }
 
 .navbar {

@@ -1,6 +1,18 @@
 import React from 'react';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainPage(): JSX.Element {
+  const styles = {
+    backgroundColor: '#283b27',
+    color: '#c0c5cd',
+    margin: '30px',
+  };
+  const navigate = useNavigate();
+  const clickHandler = (): void => {
+    navigate('/bonus');
+  };
+
   return (
     <div className="mainpage">
       <span>
@@ -8,6 +20,9 @@ export default function MainPage(): JSX.Element {
         Но они фотографироваться не любят. <br />
         Приходите смотреть!
       </span>
+      <Button onClick={clickHandler} style={styles} variant="contained" size="large">
+        Поступить на факультет
+      </Button>
     </div>
   );
 }
