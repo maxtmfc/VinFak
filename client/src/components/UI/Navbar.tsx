@@ -1,12 +1,11 @@
-import { AppBar, Box, Button, Toolbar } from '@mui/material';
 import React from 'react';
+import { AppBar, Box, Button, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
-
 
 export default function Navbar(): JSX.Element {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ backgroundColor: '#4682B4' }}>
+    <Box className="nav" sx={{ flexGrow: 1 }}>
+      <AppBar className="navbar" style={{ backgroundColor: 'black', opacity: "0.8" }}>
         <Toolbar style={{ justifyContent: 'space-between', margin: 'auto 5rem' }}>
           <Button component={Link} to="/" color="inherit">
             ВинФак
@@ -21,7 +20,7 @@ export default function Navbar(): JSX.Element {
             Войти
           </Button>
           <Button component={Link} to="/user" color="inherit">
-            Зачетка
+            Зачëтка
           </Button>
           <Button component={Link} to="/admin" color="inherit">
             Администратор

@@ -10,9 +10,10 @@ import MainPage from './components/Pages/MainPage';
 import SignupPage from './components/Pages/SignupPage';
 import Navbar from './components/UI/Navbar';
 
+
 export default function App(): JSX.Element {
   return (
-    <Container>
+    <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<MainPage />} />
@@ -23,6 +24,6 @@ export default function App(): JSX.Element {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
       </Routes>
-    </Container>
+    </div>
   );
 }
