@@ -1,37 +1,28 @@
-import React, { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import elbrusLogo from './assets/elbrus.svg';
-import './App.css';
+import React from 'react';
+import { Container } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
+import AccountPage from './components/Pages/AccountPage';
+import AdminPage from './components/Pages/AdminPage';
+import BonusPage from './components/Pages/BonusPage';
+import ContactsPage from './components/Pages/ContactsPage';
+import LoginPage from './components/Pages/LoginPage';
+import MainPage from './components/Pages/MainPage';
+import SignupPage from './components/Pages/SignupPage';
+import Navbar from './components/UI/Navbar';
 
-function App(): JSX.Element {
-  const [count, setCount] = useState(0);
-
+export default function App(): JSX.Element {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://github.com/Elbrus-Bootcamp" target="_blank" rel="noreferrer">
-          <img src={elbrusLogo} className="logo elbrus" alt="Elbrus logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h2>Elbrus Bootcamp</h2>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button type="button" onClick={() => setCount((prev) => prev + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </div>
+    <Container>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/bonus" element={<BonusPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/user" element={<AccountPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+      </Routes>
+    </Container>
   );
 }
-
-export default App;
