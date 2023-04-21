@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const session = require("express-session");
 const store = require("session-file-store");
+const wineRouter = require("./routes/wineRouter");
 
 require("dotenv").config();
 
@@ -32,5 +33,7 @@ app.use(
 app.use(session(sessionConfig));
 app.use(morgan("dev"));
 app.use(express.json());
+
+app.use("/wine", wineRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

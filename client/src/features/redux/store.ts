@@ -1,8 +1,11 @@
 import type { AnyAction, ThunkAction } from '@reduxjs/toolkit';
 import { configureStore } from '@reduxjs/toolkit';
+import wineReducer from './slices/wine/wineSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    setAllWine: wineReducer,
+  },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
