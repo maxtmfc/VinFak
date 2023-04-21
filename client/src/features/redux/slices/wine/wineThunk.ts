@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { ThunkActionCreater } from '../../store';
-import { setAllWine } from './wineSlice';
+import { addNewRecord, setAllWine } from './wineSlice';
 
 export const loadWineThunk: ThunkActionCreater = () => (dispatch) => {
   axios('http://localhost:3001/wine')

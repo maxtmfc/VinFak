@@ -3,28 +3,26 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { WineWithCategory } from '../../../../types/wine/wineType';
 
 type WineState = {
-    allWine: WineWithCategory[];
-  };
-  
-  const initialState: WineState = {
-    allWine: [],
-  };
+  allWine: WineWithCategory[];
+};
+
+const initialState: WineState = {
+  allWine: [],
+};
 
 export const wineSlice = createSlice({
   name: 'wine',
   initialState,
   reducers: {
     setAllWine: (state, action: PayloadAction<WineWithCategory[]>) => {
-      console.log(action.payload, '======== из слайса');
-      
       state.allWine = action.payload;
     },
-    // addNewRecord: (state, action) => {
-
-    // }
+    addNewRecord: (state, action: PayloadAction<WineWithCategory>) => {
+      state.allWine.unshift(action.payload);
+    },
   },
 });
 
-export const { setAllWine } = wineSlice.actions;
+export const { setAllWine, addNewRecord } = wineSlice.actions;
 
 export default wineSlice.reducer;

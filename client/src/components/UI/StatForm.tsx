@@ -25,9 +25,7 @@ const MenuProps = {
 
 export default function StatForm(): JSX.Element {
   const arrWineCat = useAppSelector((store) => store.setAllWine.allWine);
-  const allWine = arrWineCat.map((wine) => wine.title);
-  console.log(arrWineCat, '========== у клиента');
-  
+  const allWine = arrWineCat.map((wine) => wine.title);  
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -81,8 +79,8 @@ export default function StatForm(): JSX.Element {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {allWine.map((oneWine) => (
-            <MenuItem key={oneWine} value={oneWine}>
+          {allWine.map((oneWine, index) => (
+            <MenuItem key={index} value={oneWine}>
               {oneWine}
             </MenuItem>
           ))}
