@@ -15,7 +15,7 @@ export default function MainPage(): JSX.Element {
 
   return (
     <div className="mainpage">
-      <span>
+      <span className="mainpageText">
         Еще у нас живут снегири. Вася и Петя. Очень красивые и голосистые. <br />
         Но они фотографироваться не любят. <br />
         Приходите смотреть!
