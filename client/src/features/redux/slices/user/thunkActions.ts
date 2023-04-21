@@ -1,9 +1,7 @@
 import axios from 'axios';
 import type { LoginForm, SignUpForm } from '../../../../types/formTypes';
-
 import type { UserFromBackend } from '../../../../types/userTypes';
 import type { ThunkActionCreater } from '../../store';
-
 import { logoutUser, setUser } from './userSlice';
 
 export const signUpThunk: ThunkActionCreater<SignUpForm> = (formData) => (dispatch) => {
