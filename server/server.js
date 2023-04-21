@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const session = require("express-session");
 const store = require("session-file-store");
+const bonus = require('./routers/bonus');
 
 require("dotenv").config();
 
@@ -32,5 +33,6 @@ app.use(
 app.use(session(sessionConfig));
 app.use(morgan("dev"));
 app.use(express.json());
+app.use('/bonus', bonus);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

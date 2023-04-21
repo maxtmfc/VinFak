@@ -1,9 +1,16 @@
 import type { AnyAction, ThunkAction } from '@reduxjs/toolkit';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import  usersSlicer  from './slices/bonus';
+
+// типизация
+const rootReducer = combineReducers({
+  users: usersSlicer,
+})
 
 export const store = configureStore({
-  reducer: {},
-});
+  reducer: rootReducer
+  },
+);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
