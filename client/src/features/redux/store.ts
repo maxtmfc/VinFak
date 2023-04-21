@@ -1,8 +1,11 @@
 import type { AnyAction, ThunkAction } from '@reduxjs/toolkit';
 import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './slices/user/userSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    user: userReducer,
+  },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -10,5 +10,5 @@ export type SignUpForm = {
   email: string;
   password: string;
   birthDate: Date;
-  image: string;
+  // image: string;
 };

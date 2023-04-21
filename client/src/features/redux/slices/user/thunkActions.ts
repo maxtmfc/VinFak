@@ -1,13 +1,16 @@
 import axios from 'axios';
-import type { LoginForm, SignUpForm } from '../../../../types/formTypes';
-import type { UserFromBackend } from '../../../../types/userTypes';
+import type { LoginForm, SignUpForm } from '../../../../types/user/formTypes';
+import type { UserFromBackend } from '../../../../types/user/userTypes';
 import type { ThunkActionCreater } from '../../store';
 import { logoutUser, setUser } from './userSlice';
 
 export const signUpThunk: ThunkActionCreater<SignUpForm> = (formData) => (dispatch) => {
   axios
     .post<UserFromBackend>('/auth/signup', {
-      name: `${formData.firstName} ${formData.lastName}`,
+      nickName: formData.nickName,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      birthDate: formData.birthDate,
       email: formData.email,
       password: formData.password,
     })
@@ -16,6 +19,7 @@ export const signUpThunk: ThunkActionCreater<SignUpForm> = (formData) => (dispat
 };
 
 export const loginUserThunk: ThunkActionCreater<LoginForm> = (formData) => (dispatch) => {
+  console.log(formData);
   axios
     .post<UserFromBackend>('/auth/login', formData)
     .then(({ data }) => dispatch(setUser({ ...data, status: 'logged' })))

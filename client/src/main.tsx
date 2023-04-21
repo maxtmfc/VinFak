@@ -2,7 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import { Provider } from 'react-redux';
+import { store } from './features/redux/store';
 import App from './App';
+
+axios.defaults.baseURL = 'http://localhost:3001/api';
+axios.defaults.withCredentials = true;
 
 const theme = createTheme({
   typography: {
@@ -12,8 +18,10 @@ const theme = createTheme({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </BrowserRouter>,
 );
