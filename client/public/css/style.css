@@ -1,0 +1,33 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  margin: auto;
+  width: 100%;
+  max-width: none;
+}
+
+.mainpage {
+  height: 100vh;
+  /* height: 1700px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/images/WF-0020.jpg');
+  background-size: cover;
+  opacity: 0.8;
+  font-size: 30px;
+  text-align: center;
+  color: #c0c5cd;
+  flex-direction: column;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
