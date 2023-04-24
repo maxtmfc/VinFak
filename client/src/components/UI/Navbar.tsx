@@ -12,11 +12,11 @@ export default function Navbar(): JSX.Element {
     <Box className="nav" sx={{ flexGrow: 1 }}>
       <AppBar className="navbar" style={{ backgroundColor: 'black', opacity: '0.8' }}>
         <Toolbar style={{ justifyContent: 'space-between', margin: 'auto 5rem' }}>
-          <Button component={Link} to="/" color="inherit">
+          <Button style={{ fontSize: '35px' }} component={Link} to="/" color="inherit">
             ВинФак
           </Button>
-          <Button component={Link} to="/bonus" color="inherit">
-            Приемная комиссия
+          <Button style={{ fontSize: '20px' }} component={Link} to="/bonus" color="inherit">
+            Приëмная комиссия
           </Button>
           <Button component={Link} to="/contacts" color="inherit">
             Контакты
