@@ -4,6 +4,7 @@ const cors = require("cors");
 const session = require("express-session");
 const store = require("session-file-store");
 const wineRouter = require("./routes/wineRouter");
+const adminRouter = require("./routes/adminRouter");
 const authRouter = require("./routes/authRouter");
 
 require("dotenv").config();
@@ -36,6 +37,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/wine", wineRouter);
+app.use("/api/admin", adminRouter);
 app.use("/api/auth", authRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

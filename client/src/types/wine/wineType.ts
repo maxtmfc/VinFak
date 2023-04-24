@@ -1,10 +1,13 @@
 export type WineType = {
   id: number;
+  key: number;
   title: string;
   price: number;
   categoryId: number;
   createdAt: string;
   updatedAt: string;
+  priceStudent?: number,
+  priceBakalavr?: number,
 };
 
 export type Category = {
@@ -15,5 +18,6 @@ export type Category = {
 };
 
 export type WineWithCategory = WineType & {
-    category: Category;
-  };
+  Category: Category;
+};
+

@@ -15,14 +15,24 @@ export const wineSlice = createSlice({
   initialState,
   reducers: {
     setAllWine: (state, action: PayloadAction<WineWithCategory[]>) => {
-      state.allWine = action.payload;
+      state.allWine = action.payload
     },
     addNewRecord: (state, action: PayloadAction<WineWithCategory>) => {
       state.allWine.unshift(action.payload);
     },
+    addWine: (state, action: PayloadAction<WineWithCategory>) => {
+      state.allWine.push(action.payload);
+    },
+    editWine: (state, action: PayloadAction<WineWithCategory>) => {
+      const foundIndex = state.allWine.findIndex((wine) => wine.id === action.payload.id);
+      state.allWine[foundIndex] = action.payload;
+    },
+    deleteWine: (state, action: PayloadAction<WineWithCategory['id']>) => {
+      state.allWine = state.allWine.filter((el) => el.id !== action.payload);
+    },
   },
 });
 
-export const { setAllWine, addNewRecord } = wineSlice.actions;
+export const { setAllWine, addWine, addNewRecord, editWine, deleteWine } = wineSlice.actions;
 
 export default wineSlice.reducer;
