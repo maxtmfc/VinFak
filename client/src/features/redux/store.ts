@@ -1,10 +1,12 @@
 import type { AnyAction, ThunkAction } from '@reduxjs/toolkit';
 import { configureStore } from '@reduxjs/toolkit';
 import wineReducer from './slices/wine/wineSlice';
+import adminReducer from './slices/wine/adminSlice';
 
 export const store = configureStore({
   reducer: {
-    setAllWine: wineReducer,
+    wine: wineReducer,
+    admin: adminReducer,
   },
 });
 

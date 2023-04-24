@@ -24,7 +24,7 @@ const MenuProps = {
 };
 
 export default function StatForm(): JSX.Element {
-  const arrWineCat = useAppSelector((store) => store.setAllWine.allWine);
+  const arrWineCat = useAppSelector((store) => store.wine.allWine);
   const allWine = arrWineCat.map((wine) => wine.title);  
 
   const dispatch = useAppDispatch();

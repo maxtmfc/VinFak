@@ -26,6 +26,8 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "jsx-a11y/anchor-is-valid":
+    "react/function-component-definition": 0,
     "default-param-last": "off",
     "no-void": "off",
     "no-param-reassign": "off",
@@ -34,10 +36,7 @@
     "consistent-return": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "@typescript-eslint/consistent-type-imports": [
-      "error",
-      { "prefer": "type-imports" }
-    ],
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
