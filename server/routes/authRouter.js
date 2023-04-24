@@ -16,7 +16,7 @@ authRouter.post("/signup", async (req, res) => {
       nickName,
       firstName,
       lastName,
-      birthDate: new Date(birthDate),
+      birthDate: new Date(),
       hashpass,
       image:null,
       oauthId:null,

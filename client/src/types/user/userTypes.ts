@@ -16,6 +16,7 @@ export type UserFromBackend = {
   id: number;
   email: string;
   name: string;
+  admin: boolean;
 };
 
 //   user.admin = true; прописать куда то надо сюла
