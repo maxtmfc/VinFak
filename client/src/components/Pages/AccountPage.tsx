@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import Progressbar from '../UI/Progressbar';
 
 export default function AccountPage(): JSX.Element {
@@ -7,6 +8,13 @@ export default function AccountPage(): JSX.Element {
     backgroundColor: '#283b27',
     color: '#c0c5cd',
     margin: '30px',
+  };
+  const navigate = useNavigate();
+  const clickHandlerStat = (): void => {
+    navigate('/user/stat');
+  };
+  const clickHandlerMenu = (): void => {
+    navigate('/admin/menu');
   };
   return (
     <div className="accountpage">
@@ -49,8 +57,12 @@ export default function AccountPage(): JSX.Element {
       </Card>
       <br />
       <Progressbar />
-      <div className="accountpageText" style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+      <div
+        className="accountpageText"
+        style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}
+      >
         <Button
+          onClick={clickHandlerStat}
           style={{ width: 250, color: '#fff', borderColor: '#fff' }}
           variant="outlined"
           size="large"
@@ -58,6 +70,7 @@ export default function AccountPage(): JSX.Element {
           Подробная статистика
         </Button>
         <Button
+          onClick={clickHandlerMenu}
           style={{ width: 250, marginLeft: '20px', color: '#fff', borderColor: '#fff' }}
           variant="outlined"
           size="large"

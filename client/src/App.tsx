@@ -12,6 +12,7 @@ import Navbar from './components/UI/Navbar';
 import Menu from './components/UI/Menu';
 import StatForm from './components/UI/StatForm';
 import AddAdminForm from './components/UI/AddAdminForm';
+import UserStatPage from './components/Pages/UserStatPage';
 
 export default function App(): JSX.Element {
   return (
@@ -23,6 +24,7 @@ export default function App(): JSX.Element {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/user" element={<AccountPage />} />
+        <Route path="/user/stat" element={<UserStatPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/newrecord" element={<StatForm />} />
         <Route path="/admin/menu" element={<Menu />} />
