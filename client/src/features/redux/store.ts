@@ -3,10 +3,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import wineReducer from './slices/wine/wineSlice';
 import adminReducer from './slices/wine/adminSlice';
 
+import userReducer from './slices/user/userSlice';
+
 export const store = configureStore({
   reducer: {
     wine: wineReducer,
     admin: adminReducer,
+    user: userReducer,
   },
 });
 
