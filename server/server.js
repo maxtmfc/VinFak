@@ -5,6 +5,7 @@ const session = require("express-session");
 const store = require("session-file-store");
 const wineRouter = require("./routes/wineRouter");
 const authRouter = require("./routes/authRouter");
+const accountRouter = require("./routes/accountRouter")
 
 require("dotenv").config();
 
@@ -37,5 +38,6 @@ app.use(express.json());
 
 app.use("/wine", wineRouter);
 app.use("/api/auth", authRouter);
+app.use("/account", accountRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
