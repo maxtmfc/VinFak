@@ -39,9 +39,7 @@ type EditableCellProps = {
 
 export default function Menu(): JSX.Element {
   const user = useAppSelector((store) => store.user);
-  console.log(user.admin, 'user -=-=-=-=-');
-
-  const allWine = useAppSelector((store) => store.wine.allWine);
+  const allWine = useAppSelector((store) => store.wine.allWine);  
 
   const arrCategory: ArrCategory[] = allWine
     ?.map((wine) => ({

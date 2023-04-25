@@ -22,9 +22,7 @@ export const wineSlice = createSlice({
     addNewRecord: (state, action: PayloadAction<WineWithCategory>) => {
       state.allStat.unshift(action.payload);
     },
-    addWine: (state, action: PayloadAction<WineWithCategory>) => {
-      console.log(action.payload, 'action.payload .=.=.=.=.');
-      
+    addWine: (state, action: PayloadAction<WineWithCategory>) => {      
       state.allWine.push(action.payload);
     },
     editWine: (state, action: PayloadAction<WineWithCategory>) => {

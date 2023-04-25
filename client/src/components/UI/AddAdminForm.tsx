@@ -1,9 +1,8 @@
 import React from 'react';
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, DatePicker, Form, Input, Upload } from 'antd';
+import { Button, DatePicker, Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../features/redux/hooks';
-import createNewAdmin from '../../features/redux/slices/wine/adminThunk';
+import { createNewAdmin } from '../../features/redux/slices/wine/adminThunk';
 import type { AdminFormType } from '../../types/wine/adminType';
 
 export default function AddAdminForm(): JSX.Element {
@@ -33,90 +32,105 @@ export default function AddAdminForm(): JSX.Element {
       } else {
         formData[key] = values[key];
       }
-    });    
+    });
     dispatch(createNewAdmin(formData));
+    navigate('/admin');
   };
 
+  // const [messageApi, contextHolder] = message.useMessage();
+
+  // const info = () => {
+  //   messageApi.info('Hello, Ant Design!');
+  // };
+
   return (
-    <Form
-      onFinish={submitHandler}
-      className="newadminform"
-      {...formItemLayout}
-      form={form}
-      // name="register"
-      style={{ margin: '200px auto', maxWidth: 600 }}
-    >
-      <Form.Item
-        name="firstName"
-        label="Имя"
-        rules={[{ required: true, message: 'Please input your first name!', whitespace: true }]}
+    <>
+      {/* {contextHolder} */}
+
+      <Form
+        onFinish={submitHandler}
+        className="newadminform"
+        {...formItemLayout}
+        form={form}
+        style={{ 
+          margin: '200px auto', 
+          maxWidth: 600 
+        }}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name="lastName"
-        label="Фамилия"
-        rules={[{ required: true, message: 'Please input your last name!', whitespace: true }]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name="nickName"
-        label="Nickname"
-        tooltip="What do you want others to call you?"
-        rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
-          },
-          {
-            required: true,
-            message: 'Please input your E-mail!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name="birthDate"
-        label="Date of birth"
-        rules={[
-          {
-            required: true,
-            message: 'Please input date of birth!',
-          },
-        ]}
-      >
-        <DatePicker />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        label="Password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password />
-      </Form.Item>
-      <Button
-        style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
-        type="primary"
-        htmlType="submit"
-      >
-        Создать администратора
-      </Button>
-      <Button onClick={clickHandler}>Назад</Button>
-    </Form>
+        <Form.Item
+          name="firstName"
+          label="Имя"
+          rules={[{ required: true, message: 'Пожалуйста, введите ваше имя', whitespace: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="lastName"
+          label="Фамилия"
+          rules={[{ required: true, message: 'Пожалуйста, введите вашу фамилию', whitespace: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="nickName"
+          label="Никнайм"
+          tooltip="Как вы хотите, чтобы другие пользователи видели вас на сайте"
+          rules={[{ required: true, message: 'Пожалуйста, введите никнейм', whitespace: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          label="E-mail"
+          rules={[
+            {
+              type: 'email',
+              message: 'Не соотвветствует форме E-mail!',
+            },
+            {
+              required: true,
+              message: 'Пожалуйста, введите E-mail!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="birthDate"
+          label="Дата рождения"
+          
+          rules={[
+            {
+              required: true,
+              message: 'Пожалуйста, введите дату рождения',
+            },
+          ]}
+        >
+          <DatePicker style={{width: 400 }} placeholder='Выберите дату рождения'/>
+        </Form.Item>
+        <Form.Item
+          name="password"
+          label="Пароль"
+          rules={[
+            {
+              required: true,
+              message: 'Пожалуйста, введите пароль',
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password />
+        </Form.Item>
+        <Button
+          style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
+          type="primary"
+          htmlType="submit"
+          // onClick={info}
+        >
+          Создать администратора
+        </Button>
+        <Button onClick={clickHandler}>Назад</Button>
+      </Form>
+    </>
   );
 }

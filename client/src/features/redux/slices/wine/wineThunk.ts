@@ -35,7 +35,7 @@ export const createNewWine: ThunkActionCreater = (newData) => (dispatch) => {
 export const deleteOneWineThunk: ThunkActionCreater<WineWithCategory['id']> =
   (wineId) => (dispatch) => {
     axios
-      .delete(`/wine/${wineId}`)
+      .patch(`/wine/${wineId}`)
       .then(() => dispatch(deleteWine(wineId)))
       .catch(console.log);
   };

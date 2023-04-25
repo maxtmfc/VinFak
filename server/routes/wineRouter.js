@@ -7,7 +7,10 @@ wineRouter
   .route("/")
   .get(async (req, res) => {
     const discount = await Status.findAll();
-    const allWine = await Wine.findAll({ include: "Category" });
+    const allWine = await Wine.findAll({
+      where: { archived: false },
+      include: "Category",
+    });
     const result = allWine.map((wine) => ({
       ...wine.dataValues,
       priceStudent: Math.round(
@@ -101,9 +104,18 @@ wineRouter.route("/newwine").post(async (req, res) => {
   }
 });
 
-wineRouter.route("/:id").delete(async (req, res) => {
-  await Wine.destroy({ where: { id: req.params.id } });
-  res.sendStatus(200);
+wineRouter.route("/:id").patch(async (req, res) => {
+  try {
+    const foundWine = await Wine.findOne({ where: { id: req.params.id } });
+    foundWine.archived = true;
+    await foundWine.save();
+    console.log(foundWine, 'foundWine ======');
+    res.sendStatus(200);
+  } catch (error) {
+    return res.status(501).json({
+      message: `Wine не был удален по причине: ${error}`,
+    });
+  }
 });
 
 module.exports = wineRouter;

@@ -11,7 +11,7 @@ adminRouter
     res.json(allUsers);
   })
   .post(async (req, res) => {
-    const { firstName, lastName, nickName, email, password } = req.body;
+    const { firstName, lastName, nickName, email, password, birthDate } = req.body;
     const hashpass = await bcrypt.hash(password, 10);
 
     const [foundUser, created] = await User.findOrCreate({
