@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Wine extends Model {
     static associate({ Category, Stat }) {
       this.belongsTo(Category, { foreignKey: "categoryId" });
-      this.hasMany(Stat, { foreignKey: "wineId" });
+      this.hasMany(Stat, { foreignKey: "wineId", onDelete:'SET NULL' });
     }
   }
   Wine.init(

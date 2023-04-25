@@ -8,10 +8,10 @@ import accountReducer from './slices/account/accountSlice'
 
 export const store = configureStore({
   reducer: {
-    setAllWine: wineReducer,
     setUserAccount: accountReducer,
     editAccount: accountReducer,
     deleteAccount: accountReducer,
+    changeStatus: accountReducer,
     wine: wineReducer,
     admin: adminReducer,
     user: userReducer,

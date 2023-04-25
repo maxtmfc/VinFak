@@ -1,7 +1,11 @@
 import axios from 'axios';
 import type { AppThunk, ThunkActionCreater } from '../../store';
-import { setUserAccount, editAccount, deleteAccount } from './accountSlice';
-import type { UserForAccount, AccountFormType } from '../../../../types/account/accountTypes';
+import { setUserAccount, editAccount, changeStatus } from './accountSlice';
+import type {
+  UserForAccount,
+  AccountFormType,
+  ChangeStatusFormType,
+} from '../../../../types/account/accountTypes';
 import { logoutUser } from '../user/userSlice';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -31,5 +35,14 @@ export const deleteAccountThunk =
     axios
       .delete<UserForAccount>(`http://localhost:3001/account/${id}`)
       .then(() => dispatch(logoutUser()))
+      .catch(console.log);
+  };
+
+export const changeStatusThunk =
+  (id: number, data: ChangeStatusFormType): AppThunk =>
+  (dispatch) => {
+    axios
+      .patch<UserForAccount>(`http://localhost:3001/account/changestatus/${id}`, data)
+      .then(({ data }) => dispatch(changeStatus(data)))
       .catch(console.log);
   };

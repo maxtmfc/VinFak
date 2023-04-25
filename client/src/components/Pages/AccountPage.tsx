@@ -7,6 +7,7 @@ import {
   loadAccountsThunk,
   editAccountThunk,
   deleteAccountThunk,
+  changeStatusThunk
 } from '../../features/redux/slices/account/accountThunk';
 import type { AccountFormType } from '../../types/account/accountTypes';
 
@@ -24,14 +25,12 @@ export default function AccountPage(): JSX.Element {
   }, []);
 
   const navigate = useNavigate();
-
   const clickHandlerStat = (): void => {
     navigate('/user/stat');
   };
   const clickHandlerMenu = (): void => {
     navigate('/admin/menu');
   };
-
   const clickHandleMain = (): void => {
     navigate('/')
   }
@@ -43,6 +42,7 @@ export default function AccountPage(): JSX.Element {
     lastName: userAccount?.lastName,
     email: userAccount?.email,
   });
+
   const editHandler = (): void => {
     dispatch(editAccountThunk(userAccount?.id, input));
     setShow((prev) => !prev);
