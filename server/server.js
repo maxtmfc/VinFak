@@ -36,7 +36,7 @@ app.use(session(sessionConfig));
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use("/wine", wineRouter);
+app.use("/api/wine", wineRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/auth", authRouter);
 

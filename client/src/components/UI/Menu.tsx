@@ -1,5 +1,15 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Button, Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
+import React, { useEffect, useState } from 'react';
+import {
+  Button,
+  Form,
+  Input,
+  InputNumber,
+  Popconfirm,
+  Table,
+  Typography,
+  Modal,
+  Select,
+} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
 import {
@@ -8,8 +18,7 @@ import {
   editWineThunk,
   loadWineThunk,
 } from '../../features/redux/slices/wine/wineThunk';
-import type { Category, WineWithCategory } from '../../types/wine/wineType';
-import { addWine } from '../../features/redux/slices/wine/wineSlice';
+import type { ArrCategory, Category, WineWithCategory } from '../../types/wine/wineType';
 
 type Item = {
   key: number;
@@ -28,42 +37,76 @@ type EditableCellProps = {
   children: React.ReactNode;
 } & React.HTMLAttributes<HTMLElement>;
 
-const EditableCell: React.FC<EditableCellProps> = ({
-  editing,
-  dataIndex,
-  title,
-  inputType,
-  record,
-  index,
-  children,
-  ...restProps
-}) => {
-  const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
-
-  return (
-    <td {...restProps}>
-      {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{ margin: 0 }}
-          rules={[
-            {
-              required: true,
-              message: `Заполните поле`,
-            },
-          ]}
-        >
-          {inputNode}
-        </Form.Item>
-      ) : (
-        children
-      )}
-    </td>
-  );
-};
-
 export default function Menu(): JSX.Element {
+  const user = useAppSelector((store) => store.user);
+  console.log(user.admin, 'user -=-=-=-=-');
+
   const allWine = useAppSelector((store) => store.wine.allWine);
+
+  const arrCategory: ArrCategory[] = allWine
+    ?.map((wine) => ({
+      label: wine.Category.id,
+      value: wine.Category.title,
+    }))
+    .reduce((acc, cur) => {
+      if (!acc.some((item) => item.label === cur.label)) {
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
+  const EditableCell: React.FC<EditableCellProps> = ({
+    editing,
+    dataIndex,
+    title,
+    inputType,
+    record,
+    index,
+    children,
+    ...restProps
+  }) => {
+    let inputNode;
+    if (inputType === 'text') {
+      inputNode = <Input />;
+    } else if (inputType === 'number' && dataIndex !== 'categoryId') {
+      inputNode = <InputNumber />;
+    } else {
+      inputNode = (
+        <Select>
+          {arrCategory?.map((category) => (
+            <Select.Option
+              style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
+              key={category.label}
+              value={category.label}
+            >
+              {category.value}
+            </Select.Option>
+          ))}
+        </Select>
+      );
+    }
+
+    return (
+      <td {...restProps}>
+        {editing ? (
+          <Form.Item
+            name={dataIndex}
+            style={{ margin: 0 }}
+            rules={[
+              {
+                required: true,
+                message: `Заполните поле`,
+              },
+            ]}
+          >
+            {inputNode}
+          </Form.Item>
+        ) : (
+          children
+        )}
+      </td>
+    );
+  };
+
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState<string | number>('');
   const isEditing = (record: Item): boolean => record.key === editingKey;
@@ -90,7 +133,8 @@ export default function Menu(): JSX.Element {
       const index = newData.findIndex((item) => key === item.key);
       if (index > -1) {
         const item = newData[index];
-        dispatch(editWineThunk(row));
+        const editedRow = { ...row, id: item.id };
+        dispatch(editWineThunk(editedRow));
 
         newData.splice(index, 1, {
           ...item,
@@ -106,26 +150,6 @@ export default function Menu(): JSX.Element {
     }
   };
 
-  const handleAdd = (): void => {
-    const newData = {
-      id: allWine.length + 1,
-      key: allWine.length + 1,
-      title: 'Новая позиция',
-      price: 0,
-      categoryId: 1,
-      createdAt: '',
-      updatedAt: '',
-      Category: {
-        id: 1,
-        title: '',
-        createdAt: '',
-        updatedAt: '',
-      },
-    };
-    
-    dispatch(createNewWine(newData));
-  };
-
   const handleDelete = (key: number): void => {
     dispatch(deleteOneWineThunk(key));
   };
@@ -134,7 +158,7 @@ export default function Menu(): JSX.Element {
     {
       title: 'Категория',
       dataIndex: 'categoryId',
-      width: '15%',
+      width: '17%',
       editable: true,
       render: (categoryId: number): string => {
         const category: Category = allWine.find(
@@ -143,78 +167,95 @@ export default function Menu(): JSX.Element {
 
         return category ? category.title : '';
       },
+      key: 'category',
     },
     {
       title: 'Наименование позиции',
       dataIndex: 'title',
       width: '30%',
       editable: true,
+      key: 'title',
     },
     {
       title: 'Абитуриент',
       dataIndex: 'price',
       width: '10%',
       editable: true,
+      key: 'price',
     },
     {
       title: `Студент -14%`,
       dataIndex: 'priceStudent',
       width: '10%',
       editable: false,
+      key: `priceStudent`,
     },
     {
       title: 'Бакалавр -26%',
       dataIndex: 'priceBakalavr',
       width: '10%',
       editable: false,
+      key: 'priceBakalavr',
     },
     {
       title: 'Редактировать',
+      key: 'operation',
       dataIndex: 'operation',
       render: (_: any, record: Item) => {
         const editable = isEditing(record);
         return editable ? (
           <span>
             <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
-              Save
+              Сохранить
             </Typography.Link>
             <Popconfirm title="Вы уверены?" onConfirm={cancel}>
-              <a>Cancel</a>
+              <a>Отмена</a>
             </Popconfirm>
           </span>
         ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
+          <Typography.Link
+            disabled={editingKey !== ''}
+            onClick={() => edit(record)}
+            style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
+          >
+            Изменить
           </Typography.Link>
         );
       },
     },
     {
       title: 'Удалить позицию',
+      key: 'delete',
       dataIndex: 'operation',
       render: (_: any, record: { key: number }) =>
         allWine.length >= 1 ? (
           <Popconfirm title="Вы уверены?" onConfirm={() => handleDelete(record.key)}>
-            <a>Delete</a>
+            <a>Удалить</a>
           </Popconfirm>
         ) : null,
     },
   ];
+  user?.admin ? columns : columns.splice(-2)
 
-  const mergedColumns = columns.map((col) => {
+  const mergedColumns = columns?.map((col) => {    
     if (!col.editable) {
       return col;
     }
-    return {
-      ...col,
-      onCell: (record: Item) => ({
-        record,
-        inputType: col.dataIndex === 'title' ? 'text' : 'number',
-        dataIndex: col.dataIndex,
-        title: col.title,
-        editing: isEditing(record),
-      }),
-    };
+    {
+      return {
+        ...col,
+        onCell: (record: Item) => (
+          {
+            record,
+            inputType: col.dataIndex === 'title' ? 'text' : 'number',
+            dataIndex: col.dataIndex,
+            title: col.title,
+            editing: isEditing(record),
+          }
+       ),
+      };
+    }
+   
   });
 
   const navigate = useNavigate();
@@ -222,45 +263,139 @@ export default function Menu(): JSX.Element {
     navigate(-1);
   };
 
-  return (
-    <Form form={form} component={false}>
-      <Button
-        onClick={handleAdd}
-        type="primary"
-        style={{ margin: '100px 20px 0px 20px', fontFamily: 'Fira Sans Condensed, sans-serif' }}
-      >
-        Добавить позицию
-      </Button>
-      <Button
-        onClick={clickHandler}
-        type="primary"
-        style={{
-          backgroundColor: 'black',
-          margin: '100px 20px 0px 20px',
-          fontFamily: 'Fira Sans Condensed, sans-serif',
-        }}
-      >
-        Назад
-      </Button>
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const handleAddPosition = (): void => {
+    setShowModal(true);
+  };
+  const handleModalClose = (): void => {
+    setShowModal(false);
+  };
 
-      {!allWine && 'Loading ...'}
-      {allWine && (
-        <Table
-          style={{ margin: '30px 20px 0px 20px' }}
-          components={{
-            body: {
-              cell: EditableCell,
-            },
+  const [newItem, setNewItem] = useState<Item>({
+    key: -1,
+    categoryId: 0,
+    title: '',
+    price: 0,
+  });
+
+  const handleAdd = (): void => {
+    try {
+      form.validateFields().then((values) => {
+        const newItem: Item = {
+          key: allWine.length + 1,
+          categoryId: values.categoryId,
+          title: values.title,
+          price: values.price,
+        };
+        dispatch(createNewWine(newItem));
+        setShowModal(false);
+      });
+    } catch (errInfo) {
+      console.log('Validate Failed:', errInfo);
+    }
+  };
+
+  return (
+    <>
+      <Modal
+        style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
+        title="Добавить новую позицию"
+        open={showModal}
+        onCancel={handleModalClose}
+        footer={[
+          <Button key="cancel" onClick={handleModalClose}>
+            Отмена
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleAdd}>
+            Добавить
+          </Button>,
+        ]}
+      >
+        <Form form={form}>
+          <Form.Item
+            name="categoryId"
+            rules={[
+              {
+                required: true,
+                message: 'Пожалуйста, выберите категорию',
+              },
+            ]}
+          >
+            <Select placeholder="Категория">
+              {arrCategory?.map((category) => (
+                <Select.Option key={category.label} value={category.label}>
+                  {category.value}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item
+            name="title"
+            rules={[
+              {
+                required: true,
+                message: 'Пожалуйста, заполните наименование позиции',
+              },
+            ]}
+          >
+            <Input placeholder="Наименование позиции" />
+          </Form.Item>
+          <Form.Item
+            name="price"
+            rules={[
+              {
+                required: true,
+                message: 'Пожалуйста, введите цену',
+              },
+            ]}
+          >
+            <InputNumber style={{ width: '472.01px' }} placeholder="Цена без скидки" />
+          </Form.Item>
+        </Form>
+      </Modal>
+      <Form form={form} component={false}>
+        {user.admin && (
+          <Button
+            onClick={handleAddPosition}
+            type="primary"
+            style={{ margin: '100px 20px 0px 20px', fontFamily: 'Fira Sans Condensed, sans-serif' }}
+          >
+            Добавить позицию
+          </Button>
+        )}
+
+        <Button
+          onClick={clickHandler}
+          type="primary"
+          style={{
+            backgroundColor: 'black',
+            margin: '100px 20px 0px 20px',
+            fontFamily: 'Fira Sans Condensed, sans-serif',
           }}
-          bordered
-          dataSource={allWine}
-          columns={mergedColumns}
-          rowClassName="editable-row"
-          pagination={{
-            onChange: cancel,
-          }}
-        />
-      )}
-    </Form>
+        >
+          Назад
+        </Button>
+
+        {!allWine && 'Loading ...'}
+        {allWine && (
+          <Table
+            style={{ margin: '30px 20px 20px 20px' }}
+            components={{
+              body: {
+                cell: EditableCell,
+              },
+            }}
+            bordered
+            dataSource={allWine}
+            columns={mergedColumns}
+            rowClassName="editable-row"
+            pagination={{
+              onChange: cancel,
+            }}
+            // pagination={false}
+          />
+        )}
+      </Form>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { UploadOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Upload } from 'antd';
+import { Button, DatePicker, Form, Input, Upload } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../features/redux/hooks';
 import createNewAdmin from '../../features/redux/slices/wine/adminThunk';
@@ -27,9 +27,13 @@ export default function AddAdminForm(): JSX.Element {
 
   const submitHandler = (values: string): void => {
     const formData = {} as AdminFormType;
-    Object.keys(values).forEach((key) => {
-      if (key !== 'confirm') formData[key] = values[key];
-    });
+    Object.keys(values).forEach((key: string) => {
+      if (key === 'birthDate') {
+        formData[key] = values[key].format('YYYY-MM-DD HH:mm:ss.SSS ZZ');
+      } else {
+        formData[key] = values[key];
+      }
+    });    
     dispatch(createNewAdmin(formData));
   };
 
@@ -81,6 +85,18 @@ export default function AddAdminForm(): JSX.Element {
         <Input />
       </Form.Item>
       <Form.Item
+        name="birthDate"
+        label="Date of birth"
+        rules={[
+          {
+            required: true,
+            message: 'Please input date of birth!',
+          },
+        ]}
+      >
+        <DatePicker />
+      </Form.Item>
+      <Form.Item
         name="password"
         label="Password"
         rules={[
@@ -93,38 +109,6 @@ export default function AddAdminForm(): JSX.Element {
       >
         <Input.Password />
       </Form.Item>
-      <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={['password']}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: 'Please confirm your password!',
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The two passwords that you entered do not match!'));
-            },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-      {/* <Form.Item
-        name="upload"
-        label="Upload"
-        valuePropName="fileList"
-        // getValueFromEvent={normFile}
-      >
-        <Upload name="logo" action="/upload.do" listType="picture">
-          <Button icon={<UploadOutlined />}>Click to upload</Button>
-        </Upload>
-      </Form.Item> */}
       <Button
         style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
         type="primary"

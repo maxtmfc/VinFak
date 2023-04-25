@@ -33,7 +33,6 @@ export default function LoginPage(): JSX.Element {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(event.currentTarget));
-    console.log(formData);
 
     dispatch(loginUserThunk(formData as LoginForm));
   };
