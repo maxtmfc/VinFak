@@ -60,7 +60,7 @@ body {
   height: 100vh;
   display: flex;
   align-items: center;
-  /*background-image: url('/images/WF-9991.jpg');*/
+  background-image: url('/images/WF-9991.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -98,7 +98,7 @@ body {
   height: 100vh;
   display: flex;
   align-items: center;
-  /*background-image: url('/images/WF-9991.jpg');*/
+  background-image: url('/images/WF-9991.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

@@ -24,3 +24,7 @@ export type UserForAccount = {
     lastName:string;
     email: string;
   };
+
+  export type ChangeStatusFormType = {
+    statusId: number;
+  }

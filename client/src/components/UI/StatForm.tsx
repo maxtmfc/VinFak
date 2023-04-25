@@ -41,7 +41,6 @@ export default function StatForm(): JSX.Element {
       formData[key] = values[key];
     });
     dispatch(createNewRecord(formData));
-   
   };
 
   const handleChange = (value: string): void => {
