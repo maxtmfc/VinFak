@@ -17,6 +17,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      archived: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+      },
       priceStudent: {
         allowNull: true,
         type: Sequelize.INTEGER,

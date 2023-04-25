@@ -3,6 +3,7 @@ export type WineType = {
   key: number;
   title: string;
   price: number;
+  archived?: boolean;
   categoryId: number;
   createdAt?: string;
   updatedAt?: string;
@@ -22,9 +23,9 @@ export type WineWithCategory = WineType & {
 };
 
 export type StatFormType = {
-  userId: number;
+  userId?: number;
   title: string;
-  count: number;
+  count?: number;
 };
 
 export type Wine = {
@@ -44,4 +45,4 @@ export type WineByCategory = {
 export type ArrCategory = {
   label: string;
   value: string;
-}
+};

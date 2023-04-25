@@ -4,10 +4,7 @@ export type AdminFormType = {
   nickName: string;
   email: string;
   password: string;
-};
-
-export type ArrAdminFormType = {
-  allAdmin: [];
+  birthDate: string;
 };
 
 export type AdminFromBackend = {
