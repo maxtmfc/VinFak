@@ -1,6 +1,8 @@
 import type { AnyAction, ThunkAction } from '@reduxjs/toolkit';
 import { configureStore } from '@reduxjs/toolkit';
 import wineReducer from './slices/wine/wineSlice';
+import adminReducer from './slices/wine/adminSlice';
+
 import userReducer from './slices/user/userSlice';
 import accountReducer from './slices/account/accountSlice'
 
@@ -10,6 +12,8 @@ export const store = configureStore({
     setUserAccount: accountReducer,
     editAccount: accountReducer,
     deleteAccount: accountReducer,
+    wine: wineReducer,
+    admin: adminReducer,
     user: userReducer,
   },
 });

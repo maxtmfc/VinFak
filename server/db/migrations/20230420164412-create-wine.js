@@ -17,6 +17,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      priceStudent: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+      },
+      priceBakalavr: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+      },
       categoryId: {
         allowNull: false,
         type: Sequelize.INTEGER,

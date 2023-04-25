@@ -2,11 +2,11 @@ export type LoggedType = UserFromBackend & {
   status: 'logged';
 };
 
-export type FetchingUserType = {
+export type FetchingUserType = UserFromBackend & {
   status: 'fetching';
 };
 
-export type GuestType = {
+export type GuestType = UserFromBackend & {
   status: 'guest';
 };
 
