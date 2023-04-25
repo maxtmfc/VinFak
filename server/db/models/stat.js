@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Stat extends Model {
     static associate({ User, Wine }) {
       this.belongsTo(User, { foreignKey: "userId" });
-      this.belongsTo(Wine, { foreignKey: "wineId" });
+      this.belongsTo(Wine, { foreignKey: "wineId", onDelete:'SET NULL' });
     }
   }
   Stat.init(

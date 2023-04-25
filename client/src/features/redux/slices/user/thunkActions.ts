@@ -19,7 +19,6 @@ export const signUpThunk: ThunkActionCreater<SignUpForm> = (formData) => (dispat
 };
 
 export const loginUserThunk: ThunkActionCreater<LoginForm> = (formData) => (dispatch) => {
-  console.log(formData);
   axios
     .post<UserFromBackend>('/auth/login', formData)
     .then(({ data }) => dispatch(setUser({ ...data, status: 'logged' })))

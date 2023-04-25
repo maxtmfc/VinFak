@@ -45,6 +45,7 @@ export default function StatForm(): JSX.Element {
     });
     dispatch(createNewRecord(formData));
     setIsModalOpen(true);
+
   };
 
   const handleChange = (value: string): void => {
