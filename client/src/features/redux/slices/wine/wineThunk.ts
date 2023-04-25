@@ -4,7 +4,7 @@ import { addNewRecord, addWine, deleteWine, editWine, setAllWine } from './wineS
 import type { WineWithCategory } from '../../../../types/wine/wineType';
 
 export const loadWineThunk: ThunkActionCreater = () => (dispatch) => {
-  axios<WineWithCategory[]>('http://localhost:3001/wine')
+  axios<WineWithCategory[]>('/wine')
     .then(({ data }) => {
       dispatch(
         setAllWine(
@@ -20,29 +20,29 @@ export const loadWineThunk: ThunkActionCreater = () => (dispatch) => {
 
 export const createNewRecord: ThunkActionCreater = (newFormData) => (dispatch) => {
   axios
-    .post<WineWithCategory>('http://localhost:3001/wine', newFormData)
+    .post<WineWithCategory>('/wine', newFormData)
     .then(({ data }) => dispatch(addNewRecord(data)))
     .catch(console.log);
 };
 
-export const createNewWine: ThunkActionCreater = (newData) => (dispatch) => {  
+export const createNewWine: ThunkActionCreater = (newData) => (dispatch) => {
   axios
-    .post<WineWithCategory>('http://localhost:3001/wine/newwine', newData)
-    .then(({ data }) => dispatch(addWine(data)))
+    .post<WineWithCategory>('/wine/newwine', newData)
+    .then(({ data }) => dispatch(addWine({ ...data, key: data.id })))
     .catch(console.log);
 };
 
 export const deleteOneWineThunk: ThunkActionCreater<WineWithCategory['id']> =
   (wineId) => (dispatch) => {
     axios
-      .delete(`http://localhost:3001/wine/${wineId}`)
+      .delete(`/wine/${wineId}`)
       .then(() => dispatch(deleteWine(wineId)))
       .catch(console.log);
   };
 
 export const editWineThunk: ThunkActionCreater<WineWithCategory> = (wine) => (dispatch) => {
   axios
-    .patch<Omit<WineWithCategory, 'key'>>(`http://localhost:3001/wine`, wine)
+    .patch<Omit<WineWithCategory, 'key'>>(`/wine`, wine)
     .then(({ data }) => dispatch(editWine({ ...data, key: data.id })))
     .catch(console.error);
 };

@@ -8,7 +8,6 @@ adminRouter
   .route("/")
   .get(async (req, res) => {
     const allUsers = await User.findAll({ include: "Status" });
-    console.log(allUsers, '/////////');
     res.json(allUsers);
   })
   .post(async (req, res) => {
@@ -23,7 +22,7 @@ adminRouter
         nickName,
         hashpass,
         oauthId: null,
-        birthDate: '1990-10-24 03:00:00.000 +0300',
+        birthDate,
         image: null,
         admin: true,
         statusId: 1,

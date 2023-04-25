@@ -10,9 +10,6 @@ export const adminSlice = createSlice({
   name: 'admin',
   initialState,
   reducers: {
-    // setAdmins: (state, action: PayloadAction<AdminFromBackend[]>) => {
-    //   state.allAdmin = action.payload;
-    // },
     addNewAdmin: (state, action: PayloadAction<AdminFormType>) => {
       state.allAdmin.unshift(action.payload);
     },

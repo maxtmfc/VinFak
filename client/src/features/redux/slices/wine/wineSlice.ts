@@ -1,13 +1,15 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { WineWithCategory } from '../../../../types/wine/wineType';
+import type { StatFormType, WineWithCategory } from '../../../../types/wine/wineType';
 
 type WineState = {
   allWine: WineWithCategory[];
+  allStat: StatFormType[];
 };
 
 const initialState: WineState = {
   allWine: [],
+  allStat: [],
 };
 
 export const wineSlice = createSlice({
@@ -15,12 +17,14 @@ export const wineSlice = createSlice({
   initialState,
   reducers: {
     setAllWine: (state, action: PayloadAction<WineWithCategory[]>) => {
-      state.allWine = action.payload
+      state.allWine = action.payload;
     },
     addNewRecord: (state, action: PayloadAction<WineWithCategory>) => {
-      state.allWine.unshift(action.payload);
+      state.allStat.unshift(action.payload);
     },
     addWine: (state, action: PayloadAction<WineWithCategory>) => {
+      console.log(action.payload, 'action.payload .=.=.=.=.');
+      
       state.allWine.push(action.payload);
     },
     editWine: (state, action: PayloadAction<WineWithCategory>) => {
