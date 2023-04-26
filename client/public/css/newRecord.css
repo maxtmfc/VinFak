@@ -1,0 +1,52 @@
+.Newrecord .newrecordForm {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/images/WF-0294.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.Newrecord .newrecordForm::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+.Newrecord .ant-form-item {
+  min-Width: 500px;
+}
+.Newrecord .newrecordForm label,
+.Newrecord .newrecordForm input {
+  font-size: 25px;
+  font-family: "Fira Sans Condensed", sans-serif;
+}
+.Newrecord .newrecordForm label {
+  color: rgb(250, 250, 250);
+}
+.Newrecord .ant-btn {
+  width: 220px;
+  height: 50px;
+  margin: 10px;
+  font-size: 20px;
+  color: aliceblue;
+  background-color: #283b27;
+  border: none;
+  word-wrap: break-word;
+  text-align: center;
+}
+.Newrecord .ant-btn:hover {
+  background-color: #1b261b;
+  color: #a28706;
+}
+.Newrecord :where(.css-dev-only-do-not-override-1fviqcj).ant-btn > span {
+  font-family: "Fira Sans Condensed", sans-serif;
+}
+
+/*# sourceMappingURL=newRecord.css.map */

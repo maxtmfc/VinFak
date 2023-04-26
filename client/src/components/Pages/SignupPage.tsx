@@ -23,13 +23,16 @@ export default function SignupPage(): JSX.Element {
       }
     });
     dispatch(signUpThunk(formData));
+    setTimeout(() => {
+      navigate('/user');
+    }, 500);
   };
 
-  useEffect(() => {
-    if (user.status === 'logged') {
-      navigate('/user');
-    }
-  }, [user.status]);
+  // useEffect(() => {
+  //   if (user.status === 'logged') {
+  //     navigate('/user');
+  //   }
+  // }, [user.status]);
 
   const [form] = Form.useForm();
 

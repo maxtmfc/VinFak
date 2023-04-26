@@ -1,0 +1,91 @@
+.Signup .signuppage,
+.Signup .loginForm,
+.Login .signuppage,
+.Login .loginForm {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.Signup .signuppage,
+.Login .signuppage {
+  background-image: url("/images/WF-0185.jpg");
+}
+.Signup .loginForm,
+.Login .loginForm {
+  background-image: url("/images/WF-0026.jpg");
+}
+.Signup .signuppage:before,
+.Signup .loginForm::before,
+.Login .signuppage:before,
+.Login .loginForm::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+.Signup .signuppage::before,
+.Login .signuppage::before {
+  opacity: 0.3;
+}
+.Signup .loginForm::before,
+.Login .loginForm::before {
+  opacity: 0.6;
+}
+.Signup .ant-form-item,
+.Login .ant-form-item {
+  width: 500px;
+}
+.Signup .ant-picker,
+.Login .ant-picker {
+  width: 500px;
+  background-color: rgba(255, 255, 255, 0.737254902);
+  font-size: 22px;
+}
+.Signup .ant-input,
+.Login .ant-input {
+  font-size: 22px;
+  background-color: rgba(255, 255, 255, 0.737254902);
+}
+.Signup :where(.css-dev-only-do-not-override-1fviqcj).ant-input-affix-wrapper > input.ant-input,
+.Login :where(.css-dev-only-do-not-override-1fviqcj).ant-input-affix-wrapper > input.ant-input {
+  font-size: 22px;
+}
+.Signup :where(.css-dev-only-do-not-override-1fviqcj).ant-picker .ant-picker-input > input:placeholder-shown,
+.Signup :where(.css-dev-only-do-not-override-1fviqcj).ant-picker .ant-picker-input > input,
+.Login :where(.css-dev-only-do-not-override-1fviqcj).ant-picker .ant-picker-input > input:placeholder-shown,
+.Login :where(.css-dev-only-do-not-override-1fviqcj).ant-picker .ant-picker-input > input {
+  font-size: 22px;
+  font-family: "Fira Sans Condensed", sans-serif;
+}
+.Signup .ant-btn,
+.Login .ant-btn {
+  width: 220px;
+  height: 50px;
+  margin: 10px;
+  font-size: 18px;
+  color: aliceblue;
+  background-color: #283b27;
+  border: none;
+  word-wrap: break-word;
+  text-align: center;
+}
+.Signup :where(.css-dev-only-do-not-override-1fviqcj).ant-btn > span,
+.Login :where(.css-dev-only-do-not-override-1fviqcj).ant-btn > span {
+  font-family: "Fira Sans Condensed", sans-serif;
+}
+.Signup .ant-btn:hover,
+.Login .ant-btn:hover {
+  background-color: #1b261b;
+  color: #a28706;
+}
+
+/*# sourceMappingURL=loginSignup.css.map */
