@@ -103,7 +103,7 @@ export default function BonusPage(): JSX.Element {
           style={{ margin: '30px', width: '1000px' }}
         />
         <div className="bonuspageText" style={styles.bonusPageText}>
-          Поступай на наш факультет!
+          Поступай на наш факультет! 
         </div>
         <Button onClick={clickHandler} style={styles} variant="contained" size="large">
           Поступить
