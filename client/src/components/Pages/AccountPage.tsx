@@ -3,11 +3,12 @@ import { Card, CardContent, Typography, CardActions, Button, Input } from '@mui/
 import { useNavigate } from 'react-router-dom';
 import Progressbar from '../UI/Progressbar';
 import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
+import { Modal } from 'antd';
 import {
   loadAccountsThunk,
   editAccountThunk,
   deleteAccountThunk,
-  changeStatusThunk
+  changeStatusThunk,
 } from '../../features/redux/slices/account/accountThunk';
 import type { AccountFormType } from '../../types/account/accountTypes';
 
@@ -25,6 +26,9 @@ export default function AccountPage(): JSX.Element {
   }, []);
 
   const navigate = useNavigate();
+  const clickHandlerUser = (): void => {
+    navigate('/user');
+  };
   const clickHandlerStat = (): void => {
     navigate('/user/stat');
   };
@@ -32,8 +36,8 @@ export default function AccountPage(): JSX.Element {
     navigate('/admin/menu');
   };
   const clickHandleMain = (): void => {
-    navigate('/')
-  }
+    navigate('/');
+  };
 
   const [show, setShow] = useState(false);
   const [input, setInput] = useState<AccountFormType>({
@@ -51,10 +55,24 @@ export default function AccountPage(): JSX.Element {
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
+  function handleDelete() {
+    Modal.confirm({
+      title: 'Вы уверены, что хотите отчислиться с факультета? Ваша зачетка будет аннулирована.',
+      content: 'Это действие не может быть отменено. Придется поступать заново!',
+      okText: 'Да',
+      okType: 'danger',
+      cancelText: 'Нет',
+      onOk() {
+        dispatch(deleteAccountThunk(userAccount?.id));
+        clickHandleMain();
+      },
+      onCancel() {
+        clickHandlerUser();
+      },
+    });
+  }
   const deleteHandler = (): void => {
-    dispatch(deleteAccountThunk(userAccount?.id));
-    clickHandleMain()
+    handleDelete();
   };
 
   return (

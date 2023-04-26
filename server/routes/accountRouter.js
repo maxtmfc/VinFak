@@ -1,5 +1,5 @@
 const express = require("express");
-const { User, Status, Stat } = require("../db/models");
+const { User, Status, Stat, Wine } = require("../db/models");
 
 const accountRouter = express.Router();
 
@@ -9,6 +9,15 @@ accountRouter.get("/", async (req, res) => {
     include: [Status, Stat],
   });
   res.json(userAccount);
+});
+
+accountRouter.get("/userstat", async (req, res) => {
+  const AllUserStat = await Stat.findAll({
+    where: { id: req.session.user.id },
+    order: [['createdAt', 'DESC']],
+    include: Wine,
+  });
+  res.json(AllUserStat);
 });
 
 accountRouter.patch("/:id", async (req, res) => {
