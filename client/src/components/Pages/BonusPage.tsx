@@ -104,10 +104,6 @@ export default function BonusPage(): JSX.Element {
           pagination={false}
           style={{ margin: '30px', width: '1000px' }}
         />
-
-        {/* <Button onClick={clickHandler} style={styles} variant="contained" size="large">
-          Поступить
-        </Button> */}
       </>
     </div>
   );
