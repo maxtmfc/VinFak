@@ -44,7 +44,7 @@ export default function BonusPage(): JSX.Element {
     zIndex: 2,
     bonusPageText: {
       fontSize: '24px',
-      marginTop: '100px',
+      margin: '10px',
     },
   };
   const dispatch = useAppDispatch();
@@ -71,27 +71,29 @@ export default function BonusPage(): JSX.Element {
   };
 
   return (
-    <div className="userstatpage"
-    // className="bonuspage"
-    >
+    <div className="userstatpage">
       <>
-      <span className='bonuspageText'>
-      <h1>Условия посупления на «Винный факультет»</h1>
-      <button onClick={clickHandler}>
-        Поступить на факультет
-      </button>
-      <ul>
-        <li>Любить вино. Даже чуть больше, чем себя самого.</li>
-        <li>
-          Каждый четверг мы проводим вечеринку «Приемная комиссия», где ты можешь стать абитуриентом
-          и когда проявишь себя, то станешь и нашим студентом!
-        </li>
-        <li>
-          Ты можешь поступить на факультет перейдя по кнопке "Поступить", а также получишь зачетку, куда мы наклеим твою фотографию и будем фиксировать твою
-          успеваемость.
-        </li>
-      </ul>
-      </span>
+        <div className="bonuspage">
+          <span className="bonuspageText">
+            <h1>Условия поступления на «Винный факультет»</h1>
+
+            <ul>
+              <li>Любить вино. Даже чуть больше, чем себя самого.</li>
+              <li>
+                Каждый четверг мы проводим вечеринку «Приемная комиссия», где ты можешь стать
+                абитуриентом и когда проявишь себя, то станешь и нашим студентом!
+              </li>
+              <li>
+                Ты можешь поступить на факультет перейдя по кнопке "Поступить", а также получишь
+                зачетку, куда мы наклеим твою фотографию и будем фиксировать твою успеваемость.
+              </li>
+            </ul>
+            <div className="bonuspageText" style={styles.bonusPageText}>
+              Поступай на наш факультет!
+            </div>
+            <button onClick={clickHandler}>Поступить на факультет</button>
+          </span>
+        </div>
         <div className="bonuspageText" style={styles.bonusPageText}>
           Лучшие студенты факультета:
         </div>
@@ -102,12 +104,6 @@ export default function BonusPage(): JSX.Element {
           pagination={false}
           style={{ margin: '30px', width: '1000px' }}
         />
-        <div className="bonuspageText" style={styles.bonusPageText}>
-          Поступай на наш факультет! 
-        </div>
-        <Button onClick={clickHandler} style={styles} variant="contained" size="large">
-          Поступить
-        </Button>
       </>
     </div>
   );

@@ -1,11 +1,12 @@
-import React from 'react';
-import { useAppDispatch } from '../../features/redux/hooks';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
 import { signUpThunk } from '../../features/redux/slices/user/thunkActions';
 import type { SignUpForm } from '../../types/user/formTypes';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, DatePicker, Button, Grid, Space } from 'antd';
 
 export default function SignupPage(): JSX.Element {
+  const user = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const clickHandler = (): void => {
@@ -22,8 +23,13 @@ export default function SignupPage(): JSX.Element {
       }
     });
     dispatch(signUpThunk(formData));
-    navigate('/user');
   };
+
+  useEffect(() => {
+    if (user.status === 'logged') {
+      navigate('/user');
+    }
+  }, [user.status]);
 
   const [form] = Form.useForm();
 
@@ -110,12 +116,8 @@ export default function SignupPage(): JSX.Element {
           <Input.Password placeholder="Подтвердите пароль" />
         </Form.Item>
         <Space>
-          <Button htmlType="submit">
-            Поступить на факультет
-          </Button>
-          <Button onClick={clickHandler}>
-            Назад
-          </Button>
+          <Button htmlType="submit">Поступить на факультет</Button>
+          <Button onClick={clickHandler}>Назад</Button>
         </Space>
       </Form>
     </div>
