@@ -6,7 +6,8 @@ const store = require("session-file-store");
 const wineRouter = require("./routes/wineRouter");
 const adminRouter = require("./routes/adminRouter");
 const authRouter = require("./routes/authRouter");
-const accountRouter = require("./routes/accountRouter")
+const accountRouter = require("./routes/accountRouter");
+const bestRouter = require("./routes/bestRouter");
 
 require("dotenv").config();
 
@@ -41,5 +42,6 @@ app.use("/api/wine", wineRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/auth", authRouter);
 app.use("/account", accountRouter);
+app.use("/best", bestRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

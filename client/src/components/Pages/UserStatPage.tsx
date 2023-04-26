@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Table } from 'antd';
-import type { ColumnsType, TableProps } from 'antd/es/table';
-import { Grid } from '@mui/material';
+import type { ColumnsType} from 'antd/es/table';
 import { useAppSelector, useAppDispatch } from '../../features/redux/hooks';
 import { useNavigate } from 'react-router-dom';
 import { loadUserStatThunk } from '../../features/redux/slices/account/userStatThunk';
@@ -40,8 +39,8 @@ export default function UserStatPage(): JSX.Element {
     zIndex: 2,
   };
   const dispatch = useAppDispatch();
-  const allUserStat = useAppSelector((store) => store.setAllUserStat.allUserStat);
-  const userStatWithDate = allUserStat.map(function (userStat) {
+  const oneUserStat = useAppSelector((store) => store.setOneUserStat.OneUserStat);
+  const userStatWithDate = oneUserStat.map(function (userStat) {
     const wine = userStat.Wine.title;
     const count = userStat.count;
     const date = new Date(userStat.createdAt).toLocaleString('ru-RU', {
