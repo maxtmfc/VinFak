@@ -38,6 +38,7 @@ export default function AddAdminForm(): JSX.Element {
   };
 
   return (
+   
       <Form
         onFinish={submitHandler}
         className="newadminform"
@@ -122,5 +123,6 @@ export default function AddAdminForm(): JSX.Element {
         </Button>
         <Button onClick={clickHandler}>Назад</Button>
       </Form>
+   
   );
 }
