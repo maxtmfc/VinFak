@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { Modal, Select } from 'antd';
+import { Modal, Select, Space } from 'antd';
 import { Form, InputNumber, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
@@ -37,12 +37,11 @@ export default function StatForm(): JSX.Element {
   const clickHandler = (): void => {
     navigate(-1);
   };
-  // const [wineTitle, setWineTitle] = React.useState<string>('');
   const [inputData, setInputData] = React.useState<StatFormType>()!;
 
   const [form] = Form.useForm();
 
-  const submitHandler = async (values: string | number): void => {
+  const submitHandler = async (values: string | number): Promise<void> => {
     try {
       const formData = {} as StatFormType;
       Object.keys(values).forEach((key: string | number) => {
@@ -55,12 +54,10 @@ export default function StatForm(): JSX.Element {
     } catch (error) {
       console.log(error);
     }
-   
   };
 
   const handleChange = (value: string): void => {
     form.setFieldsValue({ title: value });
-    // setWineTitle(value);
   };
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -69,68 +66,68 @@ export default function StatForm(): JSX.Element {
     setIsModalOpen(false);
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
   const foundUser = allUsers?.find((user) => user.id === inputData?.userId);
   const foundNickName = foundUser?.nickName;
 
   return (
-    <Form className="newrecordForm" onFinish={submitHandler} form={form}>
-      <Form.Item className="newrecordFormText"
-        name="userId"
-        label="ID клиента"
-        style={{ fontSize: "20px" }}
-        rules={[
-          {
-            required: true,
-            message: `Заполните поле`,
-          },
-        ]}
-      >
-        <InputNumber style={{ width: 400 }} placeholder={'ID клиента'} />
-      </Form.Item>
-      <Form.Item
-        name="title"
-        label="Наименование позиции"
-        rules={[
-          {
-            required: true,
-            message: `Заполните поле`,
-          },
-        ]}
-      >
-        <Select
-          style={{ width: 300 }}
-          onChange={handleChange}
-          // value={wineTitle}
-          options={wineOptions}
-        />
-      </Form.Item>
-      <Form.Item
-        name="count"
-        label="Количество бокалов"
-        rules={[
-          {
-            required: true,
-            message: `Заполните поле`,
-          },
-        ]}
-      >
-        <InputNumber />
-      </Form.Item>
-      <Button htmlType="submit">Принять зачёт</Button>
-      <Modal
-        title="Ура! Наш студент стал на шаг ближе к цели!"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <p>Пользователю {foundNickName}</p>
-        <p>было начислено {inputData?.count} бокал(-а/ов)</p>
-      </Modal>
-      <Button onClick={clickHandler}>Назад</Button>
-    </Form>
+    <div className="Newrecord">
+      <Form className="newrecordForm" onFinish={submitHandler} form={form}>
+        <Form.Item
+          className="newrecordFormText"
+          name="userId"
+          label="ID клиента"
+          style={{ fontSize: '20px' }}
+          rules={[
+            {
+              required: true,
+              message: `Заполните поле`,
+            },
+          ]}
+        >
+          <InputNumber style={{ width: 400 }} placeholder={'ID клиента'} />
+        </Form.Item>
+        <Form.Item
+          name="title"
+          label="Наименование позиции"
+          rules={[
+            {
+              required: true,
+              message: `Заполните поле`,
+            },
+          ]}
+        >
+          <Select
+            style={{ width: 300 }}
+            onChange={handleChange}
+            // value={wineTitle}
+            options={wineOptions}
+          />
+        </Form.Item>
+        <Form.Item
+          name="count"
+          label="Количество бокалов"
+          rules={[
+            {
+              required: true,
+              message: `Заполните поле`,
+            },
+          ]}
+        >
+          <InputNumber />
+        </Form.Item>
+        <Space>
+          <Button htmlType="submit">Принять зачёт</Button>
+          <Modal
+            title="Ура! Наш студент стал на шаг ближе к цели!"
+            open={isModalOpen}
+            onOk={handleOk}
+          >
+            <p>Пользователю {foundNickName}</p>
+            <p>было начислено {inputData?.count} бокал(-а/ов)</p>
+          </Modal>
+          <Button onClick={clickHandler}>Назад</Button>
+        </Space>
+      </Form>
+    </div>
   );
 }

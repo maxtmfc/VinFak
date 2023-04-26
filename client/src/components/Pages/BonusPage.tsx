@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../features/redux/hooks';
 import { bestUsersThunk } from '../../features/redux/slices/best/bestUsersThunk';
 import { Button } from '@mui/material';
-
 interface DataType {
   key: number;
   nickName: string;
@@ -71,10 +70,28 @@ export default function BonusPage(): JSX.Element {
     navigate('/signup');
   };
 
-
   return (
-    <div className="userstatpage">
+    <div className="userstatpage"
+    // className="bonuspage"
+    >
       <>
+      <span className='bonuspageText'>
+      <h1>Условия посупления на «Винный факультет»</h1>
+      <button onClick={clickHandler}>
+        Поступить на факультет
+      </button>
+      <ul>
+        <li>Любить вино. Даже чуть больше, чем себя самого.</li>
+        <li>
+          Каждый четверг мы проводим вечеринку «Приемная комиссия», где ты можешь стать абитуриентом
+          и когда проявишь себя, то станешь и нашим студентом!
+        </li>
+        <li>
+          Ты можешь поступить на факультет перейдя по кнопке "Поступить", а также получишь зачетку, куда мы наклеим твою фотографию и будем фиксировать твою
+          успеваемость.
+        </li>
+      </ul>
+      </span>
         <div className="bonuspageText" style={styles.bonusPageText}>
           Лучшие студенты факультета:
         </div>

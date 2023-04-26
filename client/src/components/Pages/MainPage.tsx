@@ -22,7 +22,7 @@ export default function MainPage(): JSX.Element {
         Приходите смотреть!
       </span>
       <Button onClick={clickHandler} style={styles} variant="contained" size="large">
-        Поступить на факультет
+        Приемная комиссия
       </Button>
     </div>
   );
