@@ -7,7 +7,7 @@ import { logoutUser, setUser } from './userSlice';
 export const signUpThunk: ThunkActionCreater<SignUpForm> = (formData) => (dispatch) => {
   axios
     .post<UserFromBackend>('/auth/signup', formData)
-    .then(({ data }) => dispatch(setUser({ ...data, status: 'logged' })))
+    .then(({ data }) => {dispatch(setUser({ ...data, status: 'logged' }))})
     .catch(console.log);
 };
 
