@@ -13,6 +13,8 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<UserType>) => action.payload,
     logoutUser: (state) => ({ status: 'guest' }),
+    // loginUserSuccess: (state) => ({ status: 'authenticated' }),
+    // loginUserFailure: (state) => ({ status: 'authenticationFailed' }),
   },
 });
 

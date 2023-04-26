@@ -1,26 +1,19 @@
-.Signup,
-.Login {
-  .signuppage,
-  .loginForm {
+.Newadmin {
+  .newadminform {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
+    // align-items: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
-  }
-  .signuppage {
     background-image: url('/images/WF-0185.jpg');
   }
-  .loginForm {
-    background-image: url('/images/WF-0026.jpg');
-  }
 
-  .signuppage:before,
-  .loginForm::before {
+  .newadminform::before {
     content: '';
     position: absolute;
     top: 0;
@@ -28,43 +21,43 @@
     width: 100%;
     height: 100%;
     background-color: black;
-  }
-
-  .signuppage::before {
     opacity: 0.3;
   }
-  .loginForm::before {
-    opacity: 0.6;
-  }
 
-  .ant-form-item {
-    width: 500px;
+  .ant-form-item-control {
+    margin-right: 300px;
+    width: 100%;
+    min-width: 400px;
   }
-
-  .ant-picker {
-    width: 500px;
-    background-color: #ffffffbc;
-    font-size: 22px;
-  }
-
   .ant-input {
     background-color: #ffffffbc;
   }
 
   :where(.css-dev-only-do-not-override-1fviqcj).ant-input {
+    font-size: 20px;
+    font-family: 'Fira Sans Condensed', sans-serif;
+  }
+  .ant-form-item .ant-form-item-label > label {
+    color: aliceblue;
+    font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
   }
 
+  .ant-picker {
+    width: 400px;
+    background-color: #ffffffbc;
+    font-size: 20px;
+  }
   :where(.css-dev-only-do-not-override-1fviqcj).ant-picker
     .ant-picker-input
     > input:placeholder-shown,
   :where(.css-dev-only-do-not-override-1fviqcj).ant-picker .ant-picker-input > input {
-    font-size: 22px;
+    font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
   }
 
   .ant-btn {
-    width: 220px;
+    min-width: 220px;
     height: 50px;
     margin: 10px;
     font-size: 18px;
@@ -75,6 +68,28 @@
     text-align: center;
   }
 
+  :where(.css-dev-only-do-not-override-1fviqcj).ant-btn > span {
+    font-family: 'Fira Sans Condensed', sans-serif;
+  }
+
+  .ant-btn:hover {
+    background-color: #1b261b;
+    color: #a28706;
+  }
+}
+
+.Menu {
+  .ant-btn {
+    min-width: 220px;
+    height: 50px;
+    margin: 100px 20px 0px 20px;
+    font-size: 18px;
+    color: aliceblue;
+    background-color: #283b27;
+    border: none;
+    word-wrap: break-word;
+    text-align: center;
+  }
   :where(.css-dev-only-do-not-override-1fviqcj).ant-btn > span {
     font-family: 'Fira Sans Condensed', sans-serif;
   }

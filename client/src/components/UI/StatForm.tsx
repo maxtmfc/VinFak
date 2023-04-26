@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
 import { createNewRecord, loadWineThunk } from '../../features/redux/slices/wine/wineThunk';
 import { StatFormType, Wine, WineByCategory } from '../../types/wine/wineType';
 import { loadUsersThunk } from '../../features/redux/slices/wine/adminThunk';
-import { useForm } from 'antd/es/form/Form';
 
 export default function StatForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -48,7 +47,7 @@ export default function StatForm(): JSX.Element {
         formData[key] = values[key];
       });
       await dispatch(createNewRecord(formData));
-      setIsModalOpen(true);
+      success();
       setInputData(values);
       form.resetFields();
     } catch (error) {
@@ -60,14 +59,16 @@ export default function StatForm(): JSX.Element {
     form.setFieldsValue({ title: value });
   };
 
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
   const foundUser = allUsers?.find((user) => user.id === inputData?.userId);
   const foundNickName = foundUser?.nickName;
+
+  const success = () => {
+    Modal.success({
+      title: `Наш студент стал на шаг ближе к цели!`,
+      content: `Пользователю ${foundNickName}
+      начислено ${inputData?.count} бокал(-а/ов)`,
+    });
+  };
 
   return (
     <div className="Newrecord">
@@ -84,7 +85,7 @@ export default function StatForm(): JSX.Element {
             },
           ]}
         >
-          <InputNumber style={{ width: 400 }} placeholder={'ID клиента'} />
+          <InputNumber placeholder={'ID клиента'} />
         </Form.Item>
         <Form.Item
           name="title"
@@ -96,12 +97,7 @@ export default function StatForm(): JSX.Element {
             },
           ]}
         >
-          <Select
-            style={{ width: 300 }}
-            onChange={handleChange}
-            // value={wineTitle}
-            options={wineOptions}
-          />
+          <Select onChange={handleChange} options={wineOptions} />
         </Form.Item>
         <Form.Item
           name="count"
@@ -116,16 +112,8 @@ export default function StatForm(): JSX.Element {
           <InputNumber />
         </Form.Item>
         <Space>
-          <Button htmlType="submit">Принять зачёт</Button>
-          <Modal
-            title="Ура! Наш студент стал на шаг ближе к цели!"
-            open={isModalOpen}
-            onOk={handleOk}
-          >
-            <p>Пользователю {foundNickName}</p>
-            <p>было начислено {inputData?.count} бокал(-а/ов)</p>
-          </Modal>
-          <Button onClick={clickHandler}>Назад</Button>
+          <Button htmlType="submit">ПРИНЯТЬ ЗАЧЁТ</Button>
+          <Button onClick={clickHandler}>НАЗАД</Button>
         </Space>
       </Form>
     </div>

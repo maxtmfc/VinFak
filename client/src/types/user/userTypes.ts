@@ -17,5 +17,5 @@ export type UserFromBackend = {
   email: string;
   name: string;
   admin: boolean;
+  // status: 'guest' | 'fetching' | 'logged';
 };
-
