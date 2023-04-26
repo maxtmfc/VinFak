@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 export default function MainPage(): JSX.Element {
   const styles = {
     backgroundColor: '#283b27',
-    color: 'aliceblue',
     margin: '30px',
     fontSize: '1.5rem',
   };
@@ -39,7 +38,7 @@ export default function MainPage(): JSX.Element {
         Скорее переходите к нам в приемную комиссию
         <br />и подробно знакомьтесь с условинями поступления и учебы на Факультете!
       </span>
-      <Button onClick={clickHandler} style={styles} variant="contained" size="large">
+      <Button className='mainpagebutton' onClick={clickHandler} style={styles} variant="contained" size="large">
         Приемная комиссия
       </Button>
     </div>
