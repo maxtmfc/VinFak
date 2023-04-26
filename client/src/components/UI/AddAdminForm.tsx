@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, DatePicker, Form, Input, message } from 'antd';
+import { Button, DatePicker, Form, Input, Space, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../features/redux/hooks';
 import { createNewAdmin } from '../../features/redux/slices/wine/adminThunk';
@@ -13,16 +13,6 @@ export default function AddAdminForm(): JSX.Element {
   };
 
   const [form] = Form.useForm();
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 16 },
-    },
-  };
 
   const submitHandler = (values: string): void => {
     const formData = {} as AdminFormType;
@@ -38,16 +28,11 @@ export default function AddAdminForm(): JSX.Element {
   };
 
   return (
-   
+    <div className="Newadmin">
       <Form
         onFinish={submitHandler}
         className="newadminform"
-        {...formItemLayout}
         form={form}
-        style={{ 
-          margin: '200px auto', 
-          maxWidth: 600 
-        }}
       >
         <Form.Item
           name="firstName"
@@ -59,13 +44,15 @@ export default function AddAdminForm(): JSX.Element {
         <Form.Item
           name="lastName"
           label="Фамилия"
-          rules={[{ required: true, message: 'Пожалуйста, введите вашу фамилию', whitespace: true }]}
+          rules={[
+            { required: true, message: 'Пожалуйста, введите вашу фамилию', whitespace: true },
+          ]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name="nickName"
-          label="Никнайм"
+          label="Псевдоним"
           tooltip="Как вы хотите, чтобы другие пользователи видели вас на сайте"
           rules={[{ required: true, message: 'Пожалуйста, введите никнейм', whitespace: true }]}
         >
@@ -90,7 +77,6 @@ export default function AddAdminForm(): JSX.Element {
         <Form.Item
           name="birthDate"
           label="Дата рождения"
-          
           rules={[
             {
               required: true,
@@ -98,7 +84,7 @@ export default function AddAdminForm(): JSX.Element {
             },
           ]}
         >
-          <DatePicker style={{width: 400 }} placeholder='Выберите дату рождения'/>
+          <DatePicker placeholder="Выберите дату рождения" />
         </Form.Item>
         <Form.Item
           name="password"
@@ -113,16 +99,18 @@ export default function AddAdminForm(): JSX.Element {
         >
           <Input.Password />
         </Form.Item>
-        <Button
-          style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
-          type="primary"
-          htmlType="submit"
-          // onClick={info}
-        >
-          Создать администратора
-        </Button>
-        <Button onClick={clickHandler}>Назад</Button>
+        <Space style={{marginRight: "300px"}}>
+          <Button
+            style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
+            type="primary"
+            htmlType="submit"
+            // onClick={info}
+          >
+            СОЗДАТЬ АДМИНИСТРАТОРА
+          </Button>
+          <Button onClick={clickHandler}>НАЗАД</Button>
+        </Space>
       </Form>
-   
+    </div>
   );
 }
