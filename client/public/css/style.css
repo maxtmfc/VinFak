@@ -11,19 +11,29 @@ body {
   max-width: none;
 }
 
-.mainpage {
+/* Main Page + Bonus Page */
+
+.mainpage,
+.bonuspage {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('/images/WF-0020.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   flex-direction: column;
 }
 
-.mainpage::before {
+.mainpage {
+  background-image: url('/images/WF-0020.jpg');
+}
+.bonuspage {
+  background-image: url('/images/WF-0096.jpg');
+}
+
+.mainpage::before,
+.bonuspage::before {
   content: '';
   display: block;
   position: absolute;
@@ -31,13 +41,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.4;
   background-color: black;
-  /* z-index: 1; */
-  /* background-color: rgba(0, 0, 0, 0.5);  */
 }
 
-.mainpageText {
+.mainpageText, .bonuspageText {
   position: relative;
   z-index: 2;
   color: #aaaeb6;
@@ -45,11 +53,49 @@ body {
   text-align: center;
 }
 
+.bonuspageText{
+  font-size: 25px;
+}
+
+.bonuspage ul {
+  list-style-type: none;
+  text-align: center;
+  margin: auto;
+  padding-left: 0;
+  width: 60%;
+}
+
+.bonuspage ul li {
+  margin-bottom: 1em;
+  line-height: 1.2;
+}
+
+.bonuspage button{
+  width: 220px;
+  height: 50px;
+  margin: 10px;
+  font-size: 18px;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  color: aliceblue;
+  background-color: #283b27;
+  border: none;
+  border-radius: 7px;
+  margin-bottom: 2em;
+}
+
+.bonuspage button:hover{
+  background-color: #1b261b;
+  color: #a28706;
+}
+
+/* Nav Bar */
+
 .navbar {
   position: sticky;
   top: 0;
   z-index: 999;
 }
+/* Account Page */
 
 .accountpage {
   height: 100vh;
@@ -59,10 +105,6 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  /* opacity: 0.8;
-  font-size: 30px;
-  text-align: center;
-  color: #c0c5cd; */
   flex-direction: column;
 }
 .accountpage::before {
@@ -76,7 +118,6 @@ body {
   opacity: 0.4;
   background-color: black;
   z-index: 1;
-  /* background-color: rgba(0, 0, 0, 0.5);  */
 }
 
 .accountpageText {
@@ -87,3 +128,59 @@ body {
   text-align: center;
 }
 
+/* UserStat Page */
+
+.userstatpage {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-image: url('/images/WF-9991.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-direction: column;
+}
+.userstatpage::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  background-color: black;
+  z-index: 1;
+}
+
+.userstatpageTable {
+  position: relative;
+  z-index: 2;
+  color: #aaaeb6;
+  font-size: 30px;
+  text-align: center;
+}
+.ant-table-wrapper .ant-table {
+  background-color: #f5f5f5;
+  font-size: 30px;
+}
+
+/* Bonus Page */
+
+.bonuspageText {
+  position: relative;
+  z-index: 2;
+  color: #aaaeb6;
+  font-size: 30px;
+  text-align: center;
+}
+
+/* Bonus Page */
+
+.bonuspageText {
+  position: relative;
+  z-index: 2;
+  color: #aaaeb6;
+  font-size: 30px;
+  text-align: center;
+}

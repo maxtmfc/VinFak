@@ -1,100 +1,133 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import type { SelectChangeEvent } from '@mui/material/Select';
-import Select from '@mui/material/Select';
-import { Button, Stack, TextField } from '@mui/material';
-import { InputNumber } from 'antd';
+import { Modal, Select, Space } from 'antd';
+import { Form, InputNumber, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
 import { createNewRecord, loadWineThunk } from '../../features/redux/slices/wine/wineThunk';
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+import { StatFormType, Wine, WineByCategory } from '../../types/wine/wineType';
+import { loadUsersThunk } from '../../features/redux/slices/wine/adminThunk';
+import { useForm } from 'antd/es/form/Form';
 
 export default function StatForm(): JSX.Element {
-  const arrWineCat = useAppSelector((store) => store.setAllWine.allWine);
-  const allWine = arrWineCat.map((wine) => wine.title);  
-
   const dispatch = useAppDispatch();
+  const arrWineCat = useAppSelector((store) => store.wine.allWine);
+  const allUsers = useAppSelector((store) => store.admin.allUsers);
+
+  const wineByCategory: WineByCategory = arrWineCat?.reduce((acc: WineByCategory, wine: Wine) => {
+    const categoryTitle = wine?.Category.title;
+    if (!acc[categoryTitle]) {
+      acc[categoryTitle] = [];
+    }
+    acc[categoryTitle].push({ label: wine.title, value: wine.title });
+    return acc;
+  }, {});
+
+  const wineOptions = Object.entries(wineByCategory).map(([categoryTitle, options]) => ({
+    label: categoryTitle,
+    options,
+  }));
+
   useEffect(() => {
     dispatch(loadWineThunk());
+    dispatch(loadUsersThunk());
   }, []);
 
   const navigate = useNavigate();
   const clickHandler = (): void => {
     navigate(-1);
   };
-  const [personName, setPersonName] = React.useState<string[]>([]);
+  const [inputData, setInputData] = React.useState<StatFormType>()!;
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const userId = parseInt(formData.get('userId') as string, 10);
-    const count = parseFloat(formData.get('count') as string);
-    const title = formData.get('title');
-    const newFormData = {
-      userId,
-      title,
-      count,
-    };    
-    dispatch(createNewRecord(newFormData));
+  const [form] = Form.useForm();
+
+  const submitHandler = async (values: string | number): Promise<void> => {
+    try {
+      const formData = {} as StatFormType;
+      Object.keys(values).forEach((key: string | number) => {
+        formData[key] = values[key];
+      });
+      await dispatch(createNewRecord(formData));
+      setIsModalOpen(true);
+      setInputData(values);
+      form.resetFields();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>): void => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(typeof value === 'string' ? value.split(',') : value);
+  const handleChange = (value: string): void => {
+    form.setFieldsValue({ title: value });
   };
+
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const foundUser = allUsers?.find((user) => user.id === inputData?.userId);
+  const foundNickName = foundUser?.nickName;
+
   return (
-    <form onSubmit={submitHandler} className="newrecordForm">
-      <TextField
-        id="outlined-multiline-flexible"
-        label="ID клиента"
-        name="userId"
-        type="number"
-        sx={{ m: 1, width: '25ch' }}
-      />
-      <FormControl sx={{ m: 1, minWidth: 400 }} size="small">
-        <InputLabel id="demo-multiple-name-label">Наименование позиции</InputLabel>
-        <Select
-          // labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          multiple
-          value={personName}
-          name="title"
-          onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
-          MenuProps={MenuProps}
+    <div className="Newrecord">
+      <Form className="newrecordForm" onFinish={submitHandler} form={form}>
+        <Form.Item
+          className="newrecordFormText"
+          name="userId"
+          label="ID клиента"
+          style={{ fontSize: '20px' }}
+          rules={[
+            {
+              required: true,
+              message: `Заполните поле`,
+            },
+          ]}
         >
-          {allWine.map((oneWine, index) => (
-            <MenuItem key={index} value={oneWine}>
-              {oneWine}
-            </MenuItem>
-          ))}
-        </Select>
-        <InputNumber defaultValue={0} name="count" />
-      </FormControl>
-      <Stack direction="row" spacing={2}>
-        <Button type="submit" variant="outlined" sx={{ m: 1, height: 40 }}>
-          Принять зачёт
-        </Button>
-        <Button onClick={clickHandler} variant="outlined" sx={{ m: 1, height: 40 }}>
-          Назад
-        </Button>
-      </Stack>
-    </form>
+          <InputNumber style={{ width: 400 }} placeholder={'ID клиента'} />
+        </Form.Item>
+        <Form.Item
+          name="title"
+          label="Наименование позиции"
+          rules={[
+            {
+              required: true,
+              message: `Заполните поле`,
+            },
+          ]}
+        >
+          <Select
+            style={{ width: 300 }}
+            onChange={handleChange}
+            // value={wineTitle}
+            options={wineOptions}
+          />
+        </Form.Item>
+        <Form.Item
+          name="count"
+          label="Количество бокалов"
+          rules={[
+            {
+              required: true,
+              message: `Заполните поле`,
+            },
+          ]}
+        >
+          <InputNumber />
+        </Form.Item>
+        <Space>
+          <Button htmlType="submit">Принять зачёт</Button>
+          <Modal
+            title="Ура! Наш студент стал на шаг ближе к цели!"
+            open={isModalOpen}
+            onOk={handleOk}
+          >
+            <p>Пользователю {foundNickName}</p>
+            <p>было начислено {inputData?.count} бокал(-а/ов)</p>
+          </Modal>
+          <Button onClick={clickHandler}>Назад</Button>
+        </Space>
+      </Form>
+    </div>
   );
 }

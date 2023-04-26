@@ -2,11 +2,11 @@ export type LoggedType = UserFromBackend & {
   status: 'logged';
 };
 
-export type FetchingUserType = {
+export type FetchingUserType = UserFromBackend & {
   status: 'fetching';
 };
 
-export type GuestType = {
+export type GuestType = UserFromBackend & {
   status: 'guest';
 };
 
@@ -19,4 +19,3 @@ export type UserFromBackend = {
   admin: boolean;
 };
 
-//   в БД мы добавили uuid , поэтому добавить и сюда и в formTypes.ts 

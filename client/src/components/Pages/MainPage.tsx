@@ -7,6 +7,7 @@ export default function MainPage(): JSX.Element {
     backgroundColor: '#283b27',
     color: '#c0c5cd',
     margin: '30px',
+    fontSize: '1.5rem',
   };
   const navigate = useNavigate();
   const clickHandler = (): void => {
@@ -21,7 +22,7 @@ export default function MainPage(): JSX.Element {
         Приходите смотреть!
       </span>
       <Button onClick={clickHandler} style={styles} variant="contained" size="large">
-        Поступить на факультет
+        Приемная комиссия
       </Button>
     </div>
   );
