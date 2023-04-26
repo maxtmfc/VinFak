@@ -21,6 +21,9 @@ export default function LoginPage(): JSX.Element {
     navigate('/user');
   };
 
+  const forgetHandler = () => {
+    navigate('/login/forget')
+  }
   const [form] = Form.useForm();
 
   return (
@@ -57,7 +60,7 @@ export default function LoginPage(): JSX.Element {
           <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} htmlType="submit">
             Войти
           </Button>
-          <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}>Забыли пароль?</Button>
+          <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} onClick={forgetHandler}>Забыли пароль?</Button>
         </Space>
       </Form>
     </div>

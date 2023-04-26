@@ -1,5 +1,6 @@
 import { Box, TextField } from '@mui/material';
 import { Container } from '@mui/system';
+import { Button } from 'antd';
 import React from 'react';
 import { useAppDispatch } from '../../features/redux/hooks';
 import { setEmail } from '../../features/redux/slices/remind/remindSlice';
@@ -22,6 +23,9 @@ export default function RemindPage(): JSX.Element {
         sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
       >
         <TextField fullWidth label="Email Adress" name="email" id="email" required autoFocus />
+        <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} htmlType="submit">
+            Отправить
+          </Button>
       </Box>
     </Container>
   );
