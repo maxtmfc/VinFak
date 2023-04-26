@@ -3,23 +3,23 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { UserStatType } from '../../../../types/account/userStatTypes';
 
 type UserStatState = {
-  allUserStat: UserStatType[];
+  OneUserStat: UserStatType[];
 };
 
 const initialState: UserStatState = {
-  allUserStat: [],
+  OneUserStat: [],
 };
 
 export const userStatSlice = createSlice({
   name: 'userStat',
   initialState,
   reducers: {
-    setAllUserStat: (state, action: PayloadAction<UserStatType[]>) => {
-      state.allUserStat = action.payload;
+    setOneUserStat: (state, action: PayloadAction<UserStatType[]>) => {
+      state.OneUserStat = action.payload;
     },
   },
 });
 
-export const { setAllUserStat } = userStatSlice.actions;
+export const { setOneUserStat } = userStatSlice.actions;
 
 export default userStatSlice.reducer;

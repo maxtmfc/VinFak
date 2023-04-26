@@ -28,10 +28,6 @@ export default function App(): JSX.Element {
     dispatch(checkUserThunk());
   }, []);
 
-  if (user.status === 'fetching') {
-    return null;
-  }
-
   return (
     <div>
       <Loader>
