@@ -1,53 +1,120 @@
-import { ThemeProvider } from '@emotion/react';
-import { DatePicker } from '@material-ui/pickers';
-import { Button, DialogTitle, TextField, Typography } from '@mui/material';
-import { Box, Container } from '@mui/system';
-import React, { useState } from 'react';
+import React from 'react';
 import { useAppDispatch } from '../../features/redux/hooks';
 import { signUpThunk } from '../../features/redux/slices/user/thunkActions';
 import type { SignUpForm } from '../../types/user/formTypes';
+import { useNavigate } from 'react-router-dom';
+import { Form, Input, DatePicker, Button } from 'antd';
 
 export default function SignupPage(): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    const data = Object.fromEntries(new FormData(event.currentTarget)) as SignUpForm;
-    dispatch(signUpThunk(data));
-
-    // window.location = '/user';
+  const navigate = useNavigate();
+  const clickHandler = (): void => {
+    navigate('/bonus');
   };
+
+  const submitHandler = (values: string): void => {
+    const formData = {} as SignUpForm;
+    Object.keys(values).forEach((key: string) => {
+      if (key === 'birthDate') {
+        formData[key] = values[key].format('YYYY-MM-DD HH:mm:ss.SSS ZZ');
+      } else {
+        formData[key] = values[key];
+      }
+    });
+    dispatch(signUpThunk(formData));
+    navigate('/user');
+  };
+
+  const [form] = Form.useForm();
+
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        component="form"
-        noValidate
-        onSubmit={handleSubmit}
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'bottom',
-        }}
+    <Form className='signuppage'
+      onFinish={submitHandler}
+      form={form}
+    >
+        <Form.Item
+        name="nickName"
+        rules={[{ required: true, message: 'Пожалуйста, введите ваш никнейм', whitespace: true }]}
       >
-        <DialogTitle>Sign Up</DialogTitle>
-        <Box mb={2}>
-          <TextField fullWidth label="Nickname" name="nickName" id="nickName" required autoFocus />
-          <TextField
-            fullWidth
-            label="First name"
-            name="firstName"
-            id="firstName"
-            required
-            autoFocus
-          />
-          <TextField fullWidth label="Last name" name="lastName" id="lastName" required autoFocus />
-          <TextField fullWidth label="Birthdate" name="birthDate" id="birthDate" required autoFocus />
-          <TextField fullWidth label="Email Adress" name="email" id="email" required autoFocus />
-          <TextField fullWidth label="Password" name="password" id="password" required autoFocus />
-        </Box>
-        <Button type="submit">Нажать</Button>
-      </Box>
-    </Container>
+        <Input placeholder="Никнейм для приложения" />
+      </Form.Item>
+      <Form.Item
+        name="firstName"
+        rules={[{ required: true, message: 'Пожалуйста, введите ваше имя', whitespace: true }]}
+      >
+        <Input placeholder="Имя" />
+      </Form.Item>
+      <Form.Item
+        name="lastName"
+        rules={[{ required: true, message: 'Пожалуйста, введите вашу фамилию', whitespace: true }]}
+      >
+        <Input placeholder="Фамилия" />
+      </Form.Item>
+      <Form.Item
+        name="email"
+        rules={[
+          {
+            type: 'email',
+            message: 'Не соотвветствует форме E-mail!',
+          },
+          {
+            required: true,
+            message: 'Пожалуйста, введите E-mail!',
+          },
+        ]}
+      >
+        <Input placeholder="Электронная почта" />
+      </Form.Item>
+      <Form.Item
+        name="birthDate"
+        rules={[
+          {
+            required: true,
+            message: 'Пожалуйста, введите дату рождения',
+          },
+        ]}
+      >
+        <DatePicker placeholder="Выберите дату рождения" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: 'Пожалуйста, введите пароль',
+          },
+        ]}
+        hasFeedback
+      >
+        <Input.Password placeholder="Пароль" />
+      </Form.Item>
+      <Form.Item
+        name="confirm"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Пожалуйста, подтвердите пароль',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('Пароли не совпадают'));
+            },
+          }),
+        ]}
+      >
+        <Input.Password placeholder="Подтвердите пароль"/>
+      </Form.Item>
+      <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} htmlType="submit">
+        Поступить на факультет
+      </Button>
+      <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} onClick={clickHandler}>
+        Назад
+      </Button>
+    </Form>
   );
 }

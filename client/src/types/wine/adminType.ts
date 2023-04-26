@@ -8,6 +8,7 @@ export type AdminFormType = {
 };
 
 export type AdminFromBackend = {
+  id: number;
   firstName: string;
   lastName: string;
   nickName: string;

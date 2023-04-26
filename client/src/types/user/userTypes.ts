@@ -19,4 +19,3 @@ export type UserFromBackend = {
   admin: boolean;
 };
 
-//   user.admin = true; прописать куда то надо сюла

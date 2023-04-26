@@ -1,14 +1,15 @@
 import React from 'react';
 import { Progress, Space } from 'antd';
 
-const count = 42;
-const status = 'Студент';
-
 const customFormat = (percent: number): JSX.Element => (
   <span style={{ color: '#fff' }}>{percent}%</span>
 );
+type ProgressbarProps = {
+  status: string;
+  userCount: number;
+};
 
-export default function AbitBar(): JSX.Element {
+export default function Progressbar({ userCount, status }: ProgressbarProps): JSX.Element {
   return (
     <div
       className="accountpageText"
@@ -38,7 +39,7 @@ export default function AbitBar(): JSX.Element {
           уже платить как СТУДЕНТ.
           <br />
           <br />
-          Тебе осталось {20 - count}!
+          Тебе осталось {20 - userCount}!
         </div>
       )}
       {status === 'Студент' && (
@@ -49,7 +50,7 @@ export default function AbitBar(): JSX.Element {
           <br />
           Тебе придется напряженно учиться и, выпив 50 бокалов, ты перейдешь в другую лигу.
           <br />
-          Тебе осталось всего {70 - count}!
+          Тебе осталось всего {70 - userCount}!
         </div>
       )}
       {status === 'Бакалавр' && (
@@ -60,11 +61,11 @@ export default function AbitBar(): JSX.Element {
         </div>
       )}
       {status === 'Абитуриент' && (
-        <Space wrap style={{ marginTop: '20px' }}>
+        <Space wrap style={{ marginTop: '10px' }}>
           <Progress
             className="my-progress"
             type="circle"
-            percent={(count / 20) * 100}
+            percent={(userCount / 20) * 100}
             size={150}
             format={customFormat}
             strokeColor="#aaaeb6"
@@ -73,11 +74,11 @@ export default function AbitBar(): JSX.Element {
         </Space>
       )}
       {status === 'Студент' && (
-        <Space wrap style={{ marginTop: '20px' }}>
+        <Space wrap style={{ marginTop: '10px' }}>
           <Progress
             className="my-progress"
             type="circle"
-            percent={((count - 20) / 50) * 100}
+            percent={((userCount - 20) / 50) * 100}
             size={150}
             format={customFormat}
             strokeColor="#aaaeb6"
@@ -86,7 +87,7 @@ export default function AbitBar(): JSX.Element {
         </Space>
       )}
       {status === 'Бакалавр' && (
-        <Space wrap style={{ marginTop: '20px' }}>
+        <Space wrap style={{ marginTop: '10px' }}>
           <Progress
             strokeColor="#c0c5cd"
             className="my-progress"
