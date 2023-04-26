@@ -10,7 +10,7 @@ export default function AdminPage(): JSX.Element {
   return (
     <div className="adminpage">
       <button type='button' onClick={() => handleButtonClick('newrecord')}>Принять новый зачёт</button>
-      <button type='button' onClick={() => handleButtonClick('menu')}>Меню</button>
+      <button type='button' onClick={() => handleButtonClick('menu')}>Винная карта</button>
       <button type='button' onClick={() => handleButtonClick('newadmin')}>Создать нового администратора</button>
     </div>
   );

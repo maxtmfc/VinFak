@@ -390,7 +390,6 @@ export default function Menu(): JSX.Element {
             pagination={{
               onChange: cancel,
             }}
-            // pagination={false}
           />
         )}
       </Form>

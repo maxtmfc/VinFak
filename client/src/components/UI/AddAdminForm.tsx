@@ -37,16 +37,7 @@ export default function AddAdminForm(): JSX.Element {
     navigate('/admin');
   };
 
-  // const [messageApi, contextHolder] = message.useMessage();
-
-  // const info = () => {
-  //   messageApi.info('Hello, Ant Design!');
-  // };
-
   return (
-    <>
-      {/* {contextHolder} */}
-
       <Form
         onFinish={submitHandler}
         className="newadminform"
@@ -131,6 +122,5 @@ export default function AddAdminForm(): JSX.Element {
         </Button>
         <Button onClick={clickHandler}>Назад</Button>
       </Form>
-    </>
   );
 }

@@ -11,7 +11,7 @@ body {
   max-width: none;
 }
 
- /* Main Page */
+/* Main Page */
 
 .mainpage {
   height: 100vh;
@@ -24,6 +24,12 @@ body {
   background-position: center;
   flex-direction: column;
 }
+/* 
+.mainpageButton{
+  background-color: #283b27;
+  color: #c0c5cd;
+  margin: 30px;
+} */
 
 .mainpage::before {
   content: '';
@@ -47,14 +53,14 @@ body {
   text-align: center;
 }
 
- /* Nav Bar */
+/* Nav Bar */
 
 .navbar {
   position: sticky;
   top: 0;
   z-index: 999;
 }
-  /* Account Page */
+/* Account Page */
 
 .accountpage {
   height: 100vh;
@@ -92,7 +98,7 @@ body {
   text-align: center;
 }
 
-  /* UserStat Page */
+/* UserStat Page */
 
 .userstatpage {
   height: 100vh;

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
 import { createNewRecord, loadWineThunk } from '../../features/redux/slices/wine/wineThunk';
 import { StatFormType, Wine, WineByCategory } from '../../types/wine/wineType';
 import { loadUsersThunk } from '../../features/redux/slices/wine/adminThunk';
+import { useForm } from 'antd/es/form/Form';
 
 export default function StatForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -36,20 +37,30 @@ export default function StatForm(): JSX.Element {
   const clickHandler = (): void => {
     navigate(-1);
   };
-  const [wineTitle, setWineTitle] = React.useState<string>('');
+  // const [wineTitle, setWineTitle] = React.useState<string>('');
+  const [inputData, setInputData] = React.useState<StatFormType>()!;
 
-  const submitHandler = (values: string | number): void => {
-    const formData = {} as StatFormType;
-    Object.keys(values).forEach((key: string | number) => {
-      formData[key] = values[key];
-    });
-    dispatch(createNewRecord(formData));
-    setIsModalOpen(true);
+  const [form] = Form.useForm();
 
+  const submitHandler = async (values: string | number): void => {
+    try {
+      const formData = {} as StatFormType;
+      Object.keys(values).forEach((key: string | number) => {
+        formData[key] = values[key];
+      });
+      await dispatch(createNewRecord(formData));
+      setIsModalOpen(true);
+      setInputData(values);
+      form.resetFields();
+    } catch (error) {
+      console.log(error);
+    }
+   
   };
 
   const handleChange = (value: string): void => {
-    setWineTitle(value);
+    form.setFieldsValue({ title: value });
+    // setWineTitle(value);
   };
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -61,11 +72,16 @@ export default function StatForm(): JSX.Element {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const foundUser = allUsers?.find((user) => user.id === inputData?.userId);
+  const foundNickName = foundUser?.nickName;
+
   return (
-    <Form className="newrecordForm" onFinish={submitHandler}>
-      <Form.Item
+    <Form className="newrecordForm" onFinish={submitHandler} form={form}>
+      <Form.Item className="newrecordFormText"
         name="userId"
         label="ID клиента"
+        style={{ fontSize: "20px" }}
         rules={[
           {
             required: true,
@@ -88,7 +104,7 @@ export default function StatForm(): JSX.Element {
         <Select
           style={{ width: 300 }}
           onChange={handleChange}
-          value={wineTitle}
+          // value={wineTitle}
           options={wineOptions}
         />
       </Form.Item>
@@ -111,8 +127,8 @@ export default function StatForm(): JSX.Element {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Пользователю </p>
-        <p>было начислено бокалов(бокал)</p>
+        <p>Пользователю {foundNickName}</p>
+        <p>было начислено {inputData?.count} бокал(-а/ов)</p>
       </Modal>
       <Button onClick={clickHandler}>Назад</Button>
     </Form>

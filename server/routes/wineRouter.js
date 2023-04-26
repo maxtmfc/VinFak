@@ -38,15 +38,15 @@ wineRouter
     });
     const userTotalCount = userAccount.Stats.reduce(
       (accumulator, currentValue) => accumulator + currentValue.count,
-      0,
+      0
     );
-    if(userTotalCount > 20 & userAccount.statusId !== 2) {
-      userAccount.update({statusId: 2})
-      userAccount.save()
+    if ((userTotalCount > 20) & (userAccount.statusId !== 2)) {
+      userAccount.update({ statusId: 2 });
+      userAccount.save();
     }
-    if(userTotalCount > 70 & userAccount.statusId !== 3) {
-      userAccount.update({statusId: 3})
-      userAccount.save()
+    if ((userTotalCount > 70) & (userAccount.statusId !== 3)) {
+      userAccount.update({ statusId: 3 });
+      userAccount.save();
     }
     res.json(newRecord);
   })
@@ -90,6 +90,7 @@ wineRouter.route("/newwine").post(async (req, res) => {
       defaults: {
         price,
         categoryId,
+        archived: false,
       },
     });
 
@@ -98,6 +99,7 @@ wineRouter.route("/newwine").post(async (req, res) => {
     } else {
       foundWine.title = title;
       foundWine.price = price;
+      foundWine.archived = false;
       foundWine.categoryId = categoryId;
       foundWine.priceStudent = Math.round(
         foundWine.price -
@@ -125,7 +127,6 @@ wineRouter.route("/:id").patch(async (req, res) => {
     const foundWine = await Wine.findOne({ where: { id: req.params.id } });
     foundWine.archived = true;
     await foundWine.save();
-    console.log(foundWine, 'foundWine ======');
     res.sendStatus(200);
   } catch (error) {
     return res.status(501).json({
