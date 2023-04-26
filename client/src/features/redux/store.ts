@@ -5,6 +5,7 @@ import adminReducer from './slices/wine/adminSlice';
 import userStatReducer from './slices/account/userStatSlice'
 import userReducer from './slices/user/userSlice';
 import accountReducer from './slices/account/accountSlice'
+import bestUsersReducer from './slices/best/bestUsersSlice'
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +13,8 @@ export const store = configureStore({
     editAccount: accountReducer,
     deleteAccount: accountReducer,
     changeStatus: accountReducer,
-    setAllUserStat: userStatReducer,
+    setOneUserStat: userStatReducer,
+    setBestUsers: bestUsersReducer,
     wine: wineReducer,
     admin: adminReducer,
     user: userReducer,

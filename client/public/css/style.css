@@ -160,3 +160,27 @@ body {
   font-size: 30px;
   text-align: center;
 }
+.ant-table-wrapper .ant-table {
+  background-color: #f5f5f5;
+  font-size: 30px;
+}
+
+/* Bonus Page */
+
+.bonuspageText {
+  position: relative;
+  z-index: 2;
+  color: #aaaeb6;
+  font-size: 30px;
+  text-align: center;
+}
+
+/* Bonus Page */
+
+.bonuspageText {
+  position: relative;
+  z-index: 2;
+  color: #aaaeb6;
+  font-size: 30px;
+  text-align: center;
+}

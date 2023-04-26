@@ -12,12 +12,12 @@ accountRouter.get("/", async (req, res) => {
 });
 
 accountRouter.get("/userstat", async (req, res) => {
-  const AllUserStat = await Stat.findAll({
-    where: { id: req.session.user.id },
+  const OneUserStat = await Stat.findAll({
+    where: { userId: req.session.user.id },
     order: [['createdAt', 'DESC']],
     include: Wine,
   });
-  res.json(AllUserStat);
+  res.json(OneUserStat);
 });
 
 accountRouter.patch("/:id", async (req, res) => {
