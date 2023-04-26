@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       admin: DataTypes.BOOLEAN,
       statusId: DataTypes.INTEGER,
+      uuid:DataTypes.STRING,
     },
     {
       sequelize,

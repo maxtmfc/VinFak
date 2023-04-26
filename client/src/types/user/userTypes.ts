@@ -19,4 +19,4 @@ export type UserFromBackend = {
   admin: boolean;
 };
 
-//   user.admin = true; прописать куда то надо сюла
+//   в БД мы добавили uuid , поэтому добавить и сюда и в formTypes.ts 
