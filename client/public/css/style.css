@@ -187,3 +187,15 @@ body {
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 20px;
 }
+
+.parent {
+  text-align: right;
+}
+.menuStatus {
+  color: #283b27;
+  font-weight: 600;
+  font-size: 20px;
+  position: absolute;
+  top: 120px;
+  right: 100px;
+}
