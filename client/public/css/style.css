@@ -11,10 +11,9 @@ body {
   max-width: none;
 }
 
-/* Main Page + Bonus Page */
+/* Main Page */
 
-.mainpage,
-.bonuspage {
+.mainpage {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -26,14 +25,10 @@ body {
 }
 
 .mainpage {
-  background-image: url('/images/WF-0020.jpg');
-}
-.bonuspage {
-  background-image: url('/images/WF-0096.jpg');
+  background-image: url('/images/mainPage.jpg');
 }
 
-.mainpage::before,
-.bonuspage::before {
+.mainpage::before {
   content: '';
   display: block;
   position: absolute;
@@ -41,39 +36,19 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.4;
+  opacity: 0.7;
   background-color: black;
 }
 
-.mainpageText,
-.bonuspageText {
+.mainpageText {
   position: relative;
   z-index: 2;
-  color: #aaaeb6;
+  color: aliceblue;
   font-size: 30px;
   text-align: center;
 }
 
-.bonuspageText {
-  font-size: 25px;
-}
-
-.bonuspage ul {
-  list-style-type: none;
-  text-align: center;
-  margin: auto;
-  padding-left: 0;
-  width: 60%;
-}
-
-.bonuspage ul li {
-  margin-bottom: 1em;
-  line-height: 1.2;
-}
-
-.bonuspage button {
-  width: 220px;
-  height: 50px;
+.mainpagebutton {
   margin: 10px;
   font-size: 18px;
   font-family: 'Fira Sans Condensed', sans-serif;
@@ -84,7 +59,59 @@ body {
   margin-bottom: 2em;
 }
 
-.bonuspage button:hover {
+.mainpagebutton:hover {
+  background-color: #1b261b;
+  color: #a28706;
+}
+
+/* Bonus Page */
+
+.bonuspage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-direction: column;
+}
+
+.bonuspage {
+  background-image: url('/images/bonusPage.jpg');
+}
+
+.bonuspage::before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  opacity: 0.7;
+  background-color: black;
+}
+
+.bonuspageText {
+  position: relative;
+  z-index: 2;
+  color: aliceblue;
+  font-size: 30px;
+  text-align: center;
+}
+
+.bonuspagebutton {
+  margin: 10px;
+  font-size: 18px;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  color: aliceblue;
+  background-color: #283b27;
+  border: none;
+  border-radius: 7px;
+  margin-bottom: 2em;
+}
+
+.bonuspagebutton:hover {
   background-color: #1b261b;
   color: #a28706;
 }
@@ -154,37 +181,21 @@ body {
   z-index: 1;
 }
 
-.userstatpageTable {
-  position: relative;
-  z-index: 2;
-  color: #aaaeb6;
-  font-size: 30px;
-  text-align: center;
-}
-
-/* Menu */
+/* Ant design tables */
 .ant-table-wrapper .ant-table,
 .ant-typography {
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 20px;
 }
 
-/* Bonus Page */
-
-.bonuspageText {
-  position: relative;
-  z-index: 2;
-  color: #aaaeb6;
-  font-size: 30px;
-  text-align: center;
+.parent {
+  text-align: right;
 }
-
-/* Bonus Page */
-
-.bonuspageText {
-  position: relative;
-  z-index: 2;
-  color: #aaaeb6;
-  font-size: 30px;
-  text-align: center;
+.menuStatus {
+  color: #283b27;
+  font-weight: 600;
+  font-size: 20px;
+  position: absolute;
+  top: 120px;
+  right: 100px;
 }

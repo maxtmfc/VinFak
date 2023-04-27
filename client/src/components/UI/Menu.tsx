@@ -40,6 +40,7 @@ type EditableCellProps = {
 export default function Menu(): JSX.Element {
   const user = useAppSelector((store) => store.user);
   const allWine = useAppSelector((store) => store.wine.allWine);
+  const { userAccount } = useAppSelector((store) => store.setUserAccount);
 
   const arrCategory: ArrCategory[] = allWine
     ?.map((wine) => ({
@@ -114,7 +115,7 @@ export default function Menu(): JSX.Element {
     dispatch(loadWineThunk());
   }, [dispatch]);
 
-  const edit = (record: Partial<Item> & { key: React.Key }): void => {
+  const edit = (record: Partial<Item> & { key: React.Key }): void => {    
     form.setFieldsValue({ categoryId: 0, title: '', price: 0, ...record });
     setEditingKey(record.key);
   };
@@ -260,18 +261,18 @@ export default function Menu(): JSX.Element {
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const handleAddPosition = (): void => {
+    // setShowModal(true);
+    if (editingKey === '') {
+      form.resetFields();
+    } else {
+      const record = data.find((item) => item.key === editingKey);
+      form.setFieldsValue(record);
+    }
     setShowModal(true);
   };
   const handleModalClose = (): void => {
     setShowModal(false);
   };
-
-  const [newItem, setNewItem] = useState<Item>({
-    key: -1,
-    categoryId: 0,
-    title: '',
-    price: 0,
-  });
 
   const handleAdd = (): void => {
     try {
@@ -351,12 +352,10 @@ export default function Menu(): JSX.Element {
       <Form form={form} component={false}>
         {user.admin && <Button onClick={handleAddPosition}>ДОБАВИТЬ ПОЗИЦИЮ</Button>}
 
-        <Button
-          onClick={clickHandler}
-        >
-          НАЗАД
-        </Button>
-
+        <Button onClick={clickHandler}>НАЗАД</Button>
+        <div className="parent">
+          <span className="menuStatus">Твой текущий статус: {userAccount?.Status.title}</span>
+        </div>
         {!allWine && 'Loading ...'}
         {allWine && (
           <Table
