@@ -1,6 +1,6 @@
 export type LoginForm = {
   email: string;
-  password: string;
+  password?: string;
 };
 
 export type SignUpForm = {
@@ -12,3 +12,9 @@ export type SignUpForm = {
   birthDate: Date;
   // image: string;
 };
+
+// export type ReminderForm = {
+// email: string;
+// }
+
+// добавить uuid 
