@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createTheme } from '@mui/material/styles';
 import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
@@ -13,13 +13,15 @@ export default function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  console.log(user.status, 'до хэндлера');
+
   const submitHandler = (values: string): void => {
     const formData = {} as LoginForm;
     Object.keys(values).forEach((key: string) => {
       formData[key] = values[key];
     });
     dispatch(loginUserThunk(formData));
-    navigate('/user');
+    console.log(user.status, 'до хэндлера');
   };
 
   const [form] = Form.useForm();

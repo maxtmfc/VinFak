@@ -15,11 +15,16 @@ export default function MainPage(): JSX.Element {
 
   return (
     <div className="mainpage">
-      <span className="mainpageText" style={{ fontSize: '50px', width: 1300 }}>
-        Хулиганский винный бар с ретро-антуражем библиотеки
-        <br /> и курицей гриль в виде фирменного блюда
+      <span className="mainpageText" style={{ fontSize: '50px', width: 1300, marginTop: 100 }}>
+        Хулиганский винный бар с ретро-антуражем
       </span>
-      <span className="mainpageText" style={{ fontSize: '30px', width: 1300, marginTop: 30 }}>
+      <span className="mainpageText" style={{ fontSize: '30px', width: 1300, marginTop: 10 }}>
+      Москва, Большой Трехсвятительский переулок, 1
+      </span>
+      <span className="mainpageText" style={{ fontSize: '30px', width: 1300, marginTop: 10 }}>
+      Телефон: +7 925 645-73-95
+      </span>
+      <span className="mainpageText" style={{ fontSize: '30px', width: 1300, marginTop: 100 }}>
         Винный Факультет (или просто ВинФак) - это бар от Евгении Качаловой, Михаила Лопатина и
         Никиты Фомкина на Китай-городе в Москве. В читальном зале библиотеки, которую перенесли из
         института, вы найдете снегирей, курицу-гриль и холодильники ЗИЛ с вином, цены на которые
@@ -27,7 +32,7 @@ export default function MainPage(): JSX.Element {
         то, считайте, что ваша мечта воплощена.
       </span>
       <span className="mainpageText" style={{ fontSize: '30px', width: 1300, marginTop: 30 }}>
-        Для студентов Винного Факультета доступны специальные цены на великолепное вино.
+        Для студентов Винного Факультета доступны супер цены на великолепное вино.
       </span>
       <span className="mainpageText" style={{ fontSize: '30px', width: 1300, marginTop: 30 }}>
         Вы уже студент ВинФака?
