@@ -2,7 +2,7 @@ import React from 'react';
 import { Progress, Space } from 'antd';
 
 const customFormat = (percent: number): JSX.Element => (
-  <span style={{ color: '#fff' }}>{percent}%</span>
+  <span style={{ color: 'aliceblue' }}>{percent}%</span>
 );
 type ProgressbarProps = {
   status: string;
@@ -20,7 +20,7 @@ export default function Progressbar({ userCount, status }: ProgressbarProps): JS
         alignItems: 'center',
       }}
     >
-      <div style={{ fontSize: '20px', color: '#fff', textAlign: 'center' }}>
+      <div style={{ fontSize: '30px', color: 'aliceblue', textAlign: 'center' }}>
         Ниже ты сможешь отслеживать свои успехи в учебе.
         <br />
         Сейчас ты носишь гордое звание: {status}!
@@ -28,7 +28,7 @@ export default function Progressbar({ userCount, status }: ProgressbarProps): JS
       </div>
       <br />
       {status === 'Абитуриент' && (
-        <div style={{ fontSize: '20px', color: '#fff', textAlign: 'center', lineHeight: 1.2 }}>
+        <div style={{ fontSize: '30px', color: 'aliceblue', textAlign: 'center', lineHeight: 1.2 }}>
           Теперь ты с нами одной крови. И можешь пить вина из раздела «Только для студентов ВинФака»
           <br />
           Пока твои цены находятся в графе АБИТУРИЕНТ.
@@ -43,7 +43,7 @@ export default function Progressbar({ userCount, status }: ProgressbarProps): JS
         </div>
       )}
       {status === 'Студент' && (
-        <div style={{ fontSize: '20px', color: '#fff', textAlign: 'center', lineHeight: 1.2 }}>
+        <div style={{ fontSize: '30px', color: 'aliceblue', textAlign: 'center', lineHeight: 1.2 }}>
           Став студентом тебе прямая дорога в БАКАЛАВРЫ.
           <br />
           Высшее образование — это непросто!
@@ -54,7 +54,7 @@ export default function Progressbar({ userCount, status }: ProgressbarProps): JS
         </div>
       )}
       {status === 'Бакалавр' && (
-        <div style={{ fontSize: '20px', color: '#fff', textAlign: 'center', lineHeight: 1.2 }}>
+        <div style={{ fontSize: '30px', color: 'aliceblue', textAlign: 'center', lineHeight: 1.2 }}>
           Все жизненные пути отныне открыты для тебя!
           <br />
           Ты же можешь пить на 26% дешевле, чем все остальные.
@@ -68,7 +68,7 @@ export default function Progressbar({ userCount, status }: ProgressbarProps): JS
             percent={(userCount / 20) * 100}
             size={150}
             format={customFormat}
-            strokeColor="#aaaeb6"
+            strokeColor="aliceblue"
             style={{ margin: '20px' }}
           />
         </Space>
@@ -81,7 +81,7 @@ export default function Progressbar({ userCount, status }: ProgressbarProps): JS
             percent={((userCount - 20) / 50) * 100}
             size={150}
             format={customFormat}
-            strokeColor="#aaaeb6"
+            strokeColor="aliceblue"
             style={{ margin: '20px' }}
           />
         </Space>
