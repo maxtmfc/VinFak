@@ -71,34 +71,40 @@ export default function BonusPage(): JSX.Element {
 
   return (
     <div className="bonuspage">
-      <span className="bonuspageText" style={{ fontSize: '50px', width: 1300, marginTop: 100 }}>
+      <span className="bonuspageText" style={{ fontSize: '55px', marginTop: 100 }}>
         Условия поступления и обучения на ВинФаке
       </span>
-      <span className="bonuspageText" style={{ fontSize: '30px', width: 1300, marginTop: 30 }}>
-        АБИТУРИЕНТ
-      </span>
-      <span className="bonuspageText" style={{ fontSize: '30px', width: 1500, marginTop: 15 }}>
-        Регистрируйся в разделе ПОСТУПИТЬ — и ты получишь электронную зачетку! Теперь ты с нами
-        одной крови. И можешь пить вина из раздела «Только для студентов ВинФака».
-      </span>
-      <span className="bonuspageText" style={{ fontSize: '30px', width: 1300, marginTop: 30 }}>
-        СТУДЕНТ
-      </span>
-      <span className="bonuspageText" style={{ fontSize: '30px', width: 1500, marginTop: 15 }}>
-        Плох тот абитуриент, который не хочет стать настоящим студентом! Для того, чтобы прорваться
-        в новую жизнь, надо выпить 20 бокалов как абитуриент и потом уже платить как СТУДЕНТ.
-        <br />А это уже нешуточная выгода: - 14%
-      </span>
-      <span className="bonuspageText" style={{ fontSize: '30px', width: 1300, marginTop: 30 }}>
-        БАКАЛАВР
-      </span>
-      <span className="bonuspageText" style={{ fontSize: '30px', width: 1500, marginTop: 15 }}>
-        Став студентом тебе прямая дорога в БАКАЛАВРЫ. Высшее образование — это непросто. Тебе
-        придется напряженно учиться и выпив 50 бокалов ты перейдешь в другую лигу. Все жизненные
-        пути станут открыты для тебя.
-        <br />
-        Ты же сможешь пить на 26% дешевле, чем все остальные.
-      </span>
+      <div className="section">
+        <div className="bonussection">
+          <span className="bonuspageTitile">АБИТУРИЕНТ</span>
+          <br />
+          <span className="bonuspageText">
+            Регистрируйся в разделе ПОСТУПИТЬ — и ты получишь электронную зачетку! Теперь ты с нами
+            одной крови. И можешь пить вина из раздела «Только для студентов ВинФака».
+          </span>
+        </div>
+        <div className="bonussection">
+          <span className="bonuspageTitile">СТУДЕНТ</span>
+          <br />
+          <span className="bonuspageText">
+            Плох тот абитуриент, который не хочет стать настоящим студентом! Для того, чтобы
+            прорваться в новую жизнь, надо выпить 20 бокалов как абитуриент и потом уже платить как
+            СТУДЕНТ.
+            <br />А это уже нешуточная выгода: - 14%
+          </span>
+        </div>
+        <div className="bonussection">
+          <span className="bonuspageTitile">БАКАЛАВР</span>
+          <br />
+          <span className="bonuspageText">
+            Став студентом тебе прямая дорога в БАКАЛАВРЫ. Высшее образование — это непросто. Тебе
+            придется напряженно учиться и выпив 50 бокалов ты перейдешь в другую лигу. Все жизненные
+            пути станут открыты для тебя.
+            <br />
+            Ты же сможешь пить на 26% дешевле, чем все остальные.
+          </span>
+        </div>
+      </div>
 
       {user.status === 'logged' ? (
         <Button
