@@ -5,6 +5,7 @@ import type { UserType } from '../../../../types/user/userTypes';
 // Define the initial state using that type
 const initialState: UserType = {
   status: 'fetching',
+  error: '',
 };
 
 export const userSlice = createSlice({
@@ -12,12 +13,13 @@ export const userSlice = createSlice({
   initialState: initialState as UserType,
   reducers: {
     setUser: (state, action: PayloadAction<UserType>) => action.payload,
-    logoutUser: (state) => ({ status: 'guest' }),
-    // loginUserSuccess: (state) => ({ status: 'authenticated' }),
-    // loginUserFailure: (state) => ({ status: 'authenticationFailed' }),
+    logoutUser: (state) => ({ ...state, status: 'guest' }),
+    setError: (state, action: PayloadAction<string>) =>
+      // console.log(action.payload, 'action.payload =======')
+      ({ ...state, error: action.payload }),
   },
 });
 
-export const { setUser, logoutUser } = userSlice.actions;
+export const { setUser, logoutUser, setError } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -83,4 +83,12 @@
     background-color: #1b261b;
     color: #a28706;
   }
+
+  .errorMessage {
+    z-index: 2;
+    color: #e29313;
+    font-size: 27px;
+    font-weight: 400;
+    font-family: 'Fira Sans Condensed', sans-serif;
+  }
 }

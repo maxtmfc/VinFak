@@ -28,10 +28,6 @@ export default function App(): JSX.Element {
     dispatch(checkUserThunk());
   }, []);
 
-  // if (user.status === 'fetching') {
-  //   return null;
-  // }
-
   return (
     <div>
       <Loader>
@@ -40,7 +36,7 @@ export default function App(): JSX.Element {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/bonus" element={<BonusPage />} />
-            <Route element={<PrivateRoute isAllowed={user.status === 'guest'} />}>
+            <Route element={<PrivateRoute isAllowed={user.status === 'guest'} redirectPath="/user"/>}>
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/login" element={<LoginPage />} />
             </Route>
