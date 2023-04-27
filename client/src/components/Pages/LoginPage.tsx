@@ -62,6 +62,7 @@ export default function LoginPage(): JSX.Element {
           </Button>
           <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}>Забыли пароль?</Button>
         </Space>
+        {errorState && <span className="errorMessage">{errorState}</span>}
       </Form>
     </div>
   );
