@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createTheme } from '@mui/material/styles';
 import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
@@ -13,15 +13,13 @@ export default function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  console.log(user.status, 'до хэндлера');
-
   const submitHandler = (values: string): void => {
     const formData = {} as LoginForm;
     Object.keys(values).forEach((key: string) => {
       formData[key] = values[key];
     });
     dispatch(loginUserThunk(formData));
-    console.log(user.status, 'до хэндлера');
+    navigate('/user');
   };
 
   const [form] = Form.useForm();
@@ -62,6 +60,7 @@ export default function LoginPage(): JSX.Element {
           </Button>
           <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}>Забыли пароль?</Button>
         </Space>
+        {errorState && <span className="errorMessage">{errorState}</span>}
       </Form>
     </div>
   );

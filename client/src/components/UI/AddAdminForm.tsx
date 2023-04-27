@@ -99,7 +99,7 @@ export default function AddAdminForm(): JSX.Element {
         >
           <Input.Password />
         </Form.Item>
-        <Space style={{marginRight: "300px"}}>
+        <Space style={{marginRight: "640px"}}>
           <Button
             style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
             type="primary"
