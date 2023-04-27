@@ -133,8 +133,22 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
+
+.Card {
+  flex: 1;
+  margin: 20px;
+  max-width: 50%;
+}
+
+.Progressbar {
+  flex: 1;
+  margin: 20px;
+  max-width: 50%;
+}
+
 .accountpage::before {
   content: '';
   display: block;
@@ -153,7 +167,7 @@ body {
   z-index: 2;
   color: #aaaeb6;
   font-size: 30px;
-  text-align: center;
+  text-align: left;
 }
 
 /* UserStat Page */

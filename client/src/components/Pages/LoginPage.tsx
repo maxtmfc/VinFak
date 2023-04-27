@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createTheme } from '@mui/material/styles';
-import { useAppDispatch } from '../../features/redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
 import { loginUserThunk } from '../../features/redux/slices/user/thunkActions';
 import type { LoginForm } from '../../types/user/formTypes';
 import { Form, Input, Button, Space } from 'antd';
@@ -9,8 +9,11 @@ import { Form, Input, Button, Space } from 'antd';
 const theme = createTheme();
 
 export default function LoginPage(): JSX.Element {
+  const user = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  console.log(user.status, 'до хэндлера');
 
   const submitHandler = (values: string): void => {
     const formData = {} as LoginForm;
@@ -18,7 +21,7 @@ export default function LoginPage(): JSX.Element {
       formData[key] = values[key];
     });
     dispatch(loginUserThunk(formData));
-    navigate('/user');
+    console.log(user.status, 'до хэндлера');
   };
 
   const [form] = Form.useForm();
