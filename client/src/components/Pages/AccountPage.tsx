@@ -81,8 +81,7 @@ export default function AccountPage(): JSX.Element {
         sx={{
           minWidth: 700,
           backgroundColor: 'black',
-          opacity: '0.8',
-          marginTop: '100px',
+          opacity: '0.9',
           marginLeft: '200px',
         }}
       >

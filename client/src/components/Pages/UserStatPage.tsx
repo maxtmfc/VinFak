@@ -34,7 +34,7 @@ const columns: ColumnsType<DataType> = [
 export default function UserStatPage(): JSX.Element {
   const styles = {
     backgroundColor: '#283b27',
-    color: '#c0c5cd',
+    fontSize: '1.5rem',
     margin: '30px',
     zIndex: 2,
   };
@@ -72,7 +72,7 @@ export default function UserStatPage(): JSX.Element {
           pagination={false}
           style={{ margin: '100px', width: '1000px' }}
         />
-        <Button onClick={clickHandler} style={styles} variant="contained" size="large">
+        <Button className='bonuspagebutton' onClick={clickHandler} style={styles} variant="contained" size="large">
           Назад
         </Button>
       </>
