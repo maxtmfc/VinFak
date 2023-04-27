@@ -33,7 +33,7 @@ wineRouter
       count,
     });
     const userAccount = await User.findOne({
-      where: { id: req.session.user.id },
+      where: { id: userId },
       include: [Status, Stat],
     });
     const userTotalCount = userAccount.Stats.reduce(

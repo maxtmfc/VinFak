@@ -18,13 +18,19 @@
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: 0.5;
+    opacity: 0.65;
   }
 
   .ant-form-item {
-    min-Width: 500px;
+    height: 35px;
+    max-width: 500px;
   }
-  
+  .ant-input-number {
+    height: 35px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   .newrecordForm label,
   .newrecordForm input {
     font-size: 25px;
@@ -35,11 +41,17 @@
     color: rgb(250, 250, 250);
   }
 
+  :where(.css-dev-only-do-not-override-1fviqcj).ant-select-single .ant-select-selector{
+    height: 35px;
+    font-size: 25px;
+    font-family: 'Fira Sans Condensed', sans-serif;
+  }
+
   .ant-btn {
     width: 220px;
     height: 50px;
     margin: 10px;
-    font-size: 20px;
+    font-size: 18px;
     color: aliceblue;
     background-color: #283b27;
     border: none;

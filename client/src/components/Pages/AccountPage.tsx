@@ -8,7 +8,6 @@ import {
   loadAccountsThunk,
   editAccountThunk,
   deleteAccountThunk,
-  changeStatusThunk,
 } from '../../features/redux/slices/account/accountThunk';
 import type { AccountFormType } from '../../types/account/accountTypes';
 
@@ -76,73 +75,85 @@ export default function AccountPage(): JSX.Element {
   };
 
   return (
-    <div className="accountpage">
+    <div className="accountpage" style={{ display: 'flex', justifyContent: 'space-between' }}>
       <Card
         className="accountpageText"
-        sx={{ minWidth: 500, backgroundColor: 'black', opacity: '0.8', mt: '100px' }}
+        sx={{
+          minWidth: 700,
+          backgroundColor: 'black',
+          opacity: '0.8',
+          marginTop: '100px',
+          marginLeft: '200px',
+        }}
       >
         <CardContent>
+          <Typography sx={{ fontSize: '50px', color: 'aliceblue' }} component="div">
+            Зачетная книжка № {userAccount?.id}
+          </Typography>
           {show ? (
             <Input
               type="text"
-              sx={{ color: '#fff' }}
+              sx={{ color: 'aliceblue' }}
               name="nickName"
               value={input.nickName}
               onChange={changeHandler}
               placeholder="Имя пользователя"
             />
           ) : (
-            <Typography sx={{ fontSize: '30px', color: '#fff' }} gutterBottom>
-              {userAccount?.nickName}
+            <Typography sx={{ fontSize: '30px', color: 'aliceblue' }} gutterBottom>
+              Псевдоним: {userAccount?.nickName}
             </Typography>
           )}
-          <Typography sx={{ fontSize: '25px', color: '#fff' }} component="div">
+          <Typography sx={{ fontSize: '30px', color: 'aliceblue' }} component="div">
             {show ? (
               <Input
-                sx={{ color: '#fff' }}
+                sx={{ color: 'aliceblue' }}
                 name="firstName"
                 value={input.firstName}
                 onChange={changeHandler}
                 placeholder="Имя"
               />
             ) : (
-              <span>{userAccount?.firstName}</span>
+              <>
+                <span>Имя: {userAccount?.firstName}</span>
+                <br />
+              </>
             )}
             {show ? (
               <Input
-                sx={{ color: '#fff' }}
+                sx={{ color: 'aliceblue' }}
                 name="lastName"
                 value={input.lastName}
                 onChange={changeHandler}
                 placeholder="Фамилия"
               />
             ) : (
-              <span> {userAccount?.lastName}</span>
+              <span> Фамилия: {userAccount?.lastName}</span>
             )}
           </Typography>
-          <Typography sx={{ mb: 1.5, fontSize: '25px', color: '#fff' }}>
-            {userAccount?.Status.title}
+          <Typography sx={{ mb: 1.5, fontSize: '30px', color: 'aliceblue' }}>
+            Звание: {userAccount?.Status.title}
             <br />
             {show ? (
               <Input
-                sx={{ color: '#fff' }}
+                sx={{ color: 'aliceblue' }}
                 name="email"
                 value={input.email}
                 onChange={changeHandler}
                 placeholder="Электронная почта"
               />
             ) : (
-              <span>{userAccount?.email}</span>
+              <span>Адрес почты: {userAccount?.email}</span>
             )}
           </Typography>
-          <Typography sx={{ fontSize: '30px', color: '#fff' }} component="div">
+          <Typography sx={{ fontSize: '30px', color: 'aliceblue' }} component="div">
             Выпито бокалов: {userCount}
           </Typography>
         </CardContent>
         <CardActions style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
           <Button
             onClick={editHandler}
-            style={{ width: 170, marginRight: '20px', color: '#fff', borderColor: 'orange' }}
+            style={{ width: 300, marginRight: '20px', color: 'aliceblue', borderColor: 'orange', fontSize: '30px' }}
             variant="outlined"
             size="large"
           >
@@ -150,7 +161,7 @@ export default function AccountPage(): JSX.Element {
           </Button>
           <Button
             onClick={deleteHandler}
-            style={{ width: 170, marginLeft: '20px', color: '#fff', borderColor: 'red' }}
+            style={{ width: 300, marginLeft: '20px', color: 'aliceblue', borderColor: 'red', fontSize: '30px' }}
             variant="outlined"
             size="large"
           >
@@ -159,24 +170,29 @@ export default function AccountPage(): JSX.Element {
         </CardActions>
       </Card>
       <br />
-      <Progressbar userCount={userCount} status={userAccount?.Status.title} />
-      <div className="accountpageText" style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button
-          onClick={clickHandlerStat}
-          style={{ width: 250, color: '#fff', borderColor: '#fff' }}
-          variant="outlined"
-          size="large"
+      <div style={{ marginRight: '200px', width: 700 }}>
+        <Progressbar userCount={userCount} status={userAccount?.Status.title} />
+        <div
+          className="accountpageText"
+          style={{ display: 'flex', justifyContent: 'space-around' }}
         >
-          Подробная статистика
-        </Button>
-        <Button
-          onClick={clickHandlerMenu}
-          style={{ width: 250, marginLeft: '20px', color: '#fff', borderColor: '#fff' }}
-          variant="outlined"
-          size="large"
-        >
-          Винная карта Студентов
-        </Button>
+          <Button
+            onClick={clickHandlerStat}
+            style={{ width: 350, color: 'aliceblue', borderColor: 'aliceblue', fontSize: '25px' }}
+            variant="outlined"
+            size="large"
+          >
+            Подробная статистика
+          </Button>
+          <Button
+            onClick={clickHandlerMenu}
+            style={{ width: 350, marginLeft: '20px', color: 'aliceblue', borderColor: 'aliceblue', fontSize: '25px' }}
+            variant="outlined"
+            size="large"
+          >
+            Винная карта Студентов
+          </Button>
+        </div>
       </div>
     </div>
   );

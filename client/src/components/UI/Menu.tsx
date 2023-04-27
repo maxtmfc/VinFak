@@ -39,7 +39,8 @@ type EditableCellProps = {
 
 export default function Menu(): JSX.Element {
   const user = useAppSelector((store) => store.user);
-  const allWine = useAppSelector((store) => store.wine.allWine);  
+  const allWine = useAppSelector((store) => store.wine.allWine);
+  const { userAccount } = useAppSelector((store) => store.setUserAccount);
 
   const arrCategory: ArrCategory[] = allWine
     ?.map((wine) => ({
@@ -114,7 +115,7 @@ export default function Menu(): JSX.Element {
     dispatch(loadWineThunk());
   }, [dispatch]);
 
-  const edit = (record: Partial<Item> & { key: React.Key }): void => {
+  const edit = (record: Partial<Item> & { key: React.Key }): void => {    
     form.setFieldsValue({ categoryId: 0, title: '', price: 0, ...record });
     setEditingKey(record.key);
   };
@@ -222,38 +223,35 @@ export default function Menu(): JSX.Element {
       },
     },
     {
-      title: 'Удалить позицию',
+      title: 'Убрать из меню',
       key: 'delete',
       dataIndex: 'operation',
       render: (_: any, record: { key: number }) =>
         allWine.length >= 1 ? (
           <Popconfirm title="Вы уверены?" onConfirm={() => handleDelete(record.key)}>
-            <a>Удалить</a>
+            <a>В архив</a>
           </Popconfirm>
         ) : null,
     },
   ];
-  user?.admin ? columns : columns.splice(-2)
+  user?.admin ? columns : columns.splice(-2);
 
-  const mergedColumns = columns?.map((col) => {    
+  const mergedColumns = columns?.map((col) => {
     if (!col.editable) {
       return col;
     }
     {
       return {
         ...col,
-        onCell: (record: Item) => (
-          {
-            record,
-            inputType: col.dataIndex === 'title' ? 'text' : 'number',
-            dataIndex: col.dataIndex,
-            title: col.title,
-            editing: isEditing(record),
-          }
-       ),
+        onCell: (record: Item) => ({
+          record,
+          inputType: col.dataIndex === 'title' ? 'text' : 'number',
+          dataIndex: col.dataIndex,
+          title: col.title,
+          editing: isEditing(record),
+        }),
       };
     }
-   
   });
 
   const navigate = useNavigate();
@@ -263,18 +261,18 @@ export default function Menu(): JSX.Element {
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const handleAddPosition = (): void => {
+    // setShowModal(true);
+    if (editingKey === '') {
+      form.resetFields();
+    } else {
+      const record = data.find((item) => item.key === editingKey);
+      form.setFieldsValue(record);
+    }
     setShowModal(true);
   };
   const handleModalClose = (): void => {
     setShowModal(false);
   };
-
-  const [newItem, setNewItem] = useState<Item>({
-    key: -1,
-    categoryId: 0,
-    title: '',
-    price: 0,
-  });
 
   const handleAdd = (): void => {
     try {
@@ -294,7 +292,7 @@ export default function Menu(): JSX.Element {
   };
 
   return (
-    <>
+    <div className="Menu">
       <Modal
         style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}
         title="Добавить новую позицию"
@@ -309,7 +307,7 @@ export default function Menu(): JSX.Element {
           </Button>,
         ]}
       >
-        <Form form={form}>
+        <Form form={form} className="menuForm">
           <Form.Item
             name="categoryId"
             rules={[
@@ -352,28 +350,12 @@ export default function Menu(): JSX.Element {
         </Form>
       </Modal>
       <Form form={form} component={false}>
-        {user.admin && (
-          <Button
-            onClick={handleAddPosition}
-            type="primary"
-            style={{ margin: '100px 20px 0px 20px', fontFamily: 'Fira Sans Condensed, sans-serif' }}
-          >
-            Добавить позицию
-          </Button>
-        )}
+        {user.admin && <Button onClick={handleAddPosition}>ДОБАВИТЬ ПОЗИЦИЮ</Button>}
 
-        <Button
-          onClick={clickHandler}
-          type="primary"
-          style={{
-            backgroundColor: 'black',
-            margin: '100px 20px 0px 20px',
-            fontFamily: 'Fira Sans Condensed, sans-serif',
-          }}
-        >
-          Назад
-        </Button>
-
+        <Button onClick={clickHandler}>НАЗАД</Button>
+        <div className="parent">
+          <span className="menuStatus">Твой текущий статус: {userAccount?.Status.title}</span>
+        </div>
         {!allWine && 'Loading ...'}
         {allWine && (
           <Table
@@ -393,6 +375,6 @@ export default function Menu(): JSX.Element {
           />
         )}
       </Form>
-    </>
+    </div>
   );
 }

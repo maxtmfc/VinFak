@@ -24,16 +24,12 @@ import NewPassPage from './components/Pages/NewPassPage';
 
 export default function App(): JSX.Element {
   const user = useAppSelector((store) => store.user);
-
+  console.log(user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(checkUserThunk());
   }, []);
-
-  // if (user.status === 'fetching') {
-  //   return null;
-  // }
 
   return (
     <div>
@@ -43,7 +39,11 @@ export default function App(): JSX.Element {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/bonus" element={<BonusPage />} />
-            <Route element={<PrivateRoute isAllowed={user.status === 'guest'} />}>
+            <Route
+              element={
+                <PrivateRoute isAllowed={user.status === 'guest'} redirectPath={"/user"}/>
+              }
+            >
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/login" element={<LoginPage />} />
             </Route>

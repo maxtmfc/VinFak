@@ -15,12 +15,12 @@ interface DataType {
 
 const columns: ColumnsType<DataType> = [
   {
-    title: 'Студент',
+    title: 'Псевдоним',
     dataIndex: 'nickName',
     key: 'nickName',
   },
   {
-    title: 'Имя студента',
+    title: 'Имя',
     dataIndex: 'firstName',
     key: 'firstName',
   },
@@ -37,15 +37,11 @@ const columns: ColumnsType<DataType> = [
 ];
 
 export default function BonusPage(): JSX.Element {
+  const user = useAppSelector((store) => store.user);
   const styles = {
     backgroundColor: '#283b27',
-    color: '#c0c5cd',
     margin: '30px',
-    zIndex: 2,
-    bonusPageText: {
-      fontSize: '24px',
-      margin: '10px',
-    },
+    fontSize: '1.5rem',
   };
   const dispatch = useAppDispatch();
   const allUsers = useAppSelector((store) => store.setBestUsers.BestUsers);
@@ -66,45 +62,80 @@ export default function BonusPage(): JSX.Element {
   }, []);
 
   const navigate = useNavigate();
-  const clickHandler = (): void => {
+  const signupHandler = (): void => {
     navigate('/signup');
+  };
+  const userHandler = (): void => {
+    navigate('/user');
   };
 
   return (
-    <div className="userstatpage">
-      <>
-        <div className="bonuspage">
+    <div className="bonuspage">
+      <span className="bonuspageText" style={{ fontSize: '55px', marginTop: 100 }}>
+        Условия поступления и обучения на ВинФаке
+      </span>
+      <div className="section">
+        <div className="bonussection">
+          <span className="bonuspageTitile">АБИТУРИЕНТ</span>
+          <br />
           <span className="bonuspageText">
-            <h1>Условия поступления на «Винный факультет»</h1>
-
-            <ul>
-              <li>Любить вино. Даже чуть больше, чем себя самого.</li>
-              <li>
-                Каждый четверг мы проводим вечеринку «Приемная комиссия», где ты можешь стать
-                абитуриентом и когда проявишь себя, то станешь и нашим студентом!
-              </li>
-              <li>
-                Ты можешь поступить на факультет перейдя по кнопке "Поступить", а также получишь
-                зачетку, куда мы наклеим твою фотографию и будем фиксировать твою успеваемость.
-              </li>
-            </ul>
-            <div className="bonuspageText" style={styles.bonusPageText}>
-              Поступай на наш факультет!
-            </div>
-            <button onClick={clickHandler}>Поступить на факультет</button>
+            Регистрируйся в разделе ПОСТУПИТЬ — и ты получишь электронную зачетку! Теперь ты с нами
+            одной крови. И можешь пить вина из раздела «Только для студентов ВинФака».
           </span>
         </div>
-        <div className="bonuspageText" style={styles.bonusPageText}>
-          Лучшие студенты факультета:
+        <div className="bonussection">
+          <span className="bonuspageTitile">СТУДЕНТ</span>
+          <br />
+          <span className="bonuspageText">
+            Плох тот абитуриент, который не хочет стать настоящим студентом! Для того, чтобы
+            прорваться в новую жизнь, надо выпить 20 бокалов как абитуриент и потом уже платить как
+            СТУДЕНТ.
+            <br />А это уже нешуточная выгода: - 14%
+          </span>
         </div>
-        <Table
-          className="userstatpageTable"
-          columns={columns}
-          dataSource={bestUsersForStat}
-          pagination={false}
-          style={{ margin: '30px', width: '1000px' }}
-        />
-      </>
+        <div className="bonussection">
+          <span className="bonuspageTitile">БАКАЛАВР</span>
+          <br />
+          <span className="bonuspageText">
+            Став студентом тебе прямая дорога в БАКАЛАВРЫ. Высшее образование — это непросто. Тебе
+            придется напряженно учиться и выпив 50 бокалов ты перейдешь в другую лигу. Все жизненные
+            пути станут открыты для тебя.
+            <br />
+            Ты же сможешь пить на 26% дешевле, чем все остальные.
+          </span>
+        </div>
+      </div>
+
+      {user.status === 'logged' ? (
+        <Button
+          className="bonuspagebutton"
+          onClick={userHandler}
+          style={styles}
+          variant="contained"
+          size="large"
+        >
+          Проверить свою зачетку
+        </Button>
+      ) : (
+        <Button
+          className="bonuspagebutton"
+          onClick={signupHandler}
+          style={styles}
+          variant="contained"
+          size="large"
+        >
+          Поступить на факультет
+        </Button>
+      )}
+      <span className="bonuspageText" style={{ fontSize: '30px', width: 1300, marginTop: 1 }}>
+        А это рейтинг 5 лучших студентов ВинФака. Попробуй потягаться с ними в успеваемости!
+      </span>
+      <Table
+        columns={columns}
+        dataSource={bestUsersForStat}
+        pagination={false}
+        style={{ margin: '20px', width: '1300px' }}
+      />
     </div>
   );
 }
