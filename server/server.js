@@ -8,6 +8,8 @@ const adminRouter = require("./routes/adminRouter");
 const authRouter = require("./routes/authRouter");
 const accountRouter = require("./routes/accountRouter");
 const bestRouter = require("./routes/bestRouter");
+const mailerRouter = require("./routes/mailerRouter");
+const { User } = require("./db/models");
 
 require("dotenv").config();
 
@@ -43,5 +45,7 @@ app.use("/api/admin", adminRouter);
 app.use("/api/auth", authRouter);
 app.use("/account", accountRouter);
 app.use("/best", bestRouter);
+app.use("/api/auth/login/forget", mailerRouter); // уточнить про путь
+
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

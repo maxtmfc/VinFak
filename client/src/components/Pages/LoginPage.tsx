@@ -12,15 +12,6 @@ export default function LoginPage(): JSX.Element {
   const user = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const error = useAppSelector((store) => store.user.error);
-
-  const [errorState, setErrorState] = useState('');
-
-  useEffect(() => {
-    setErrorState(error);
-  }, [error]);
-
-  console.log(user.status, 'до хэндлера');
 
   const submitHandler = (values: string): void => {
     const formData = {} as LoginForm;
@@ -28,11 +19,12 @@ export default function LoginPage(): JSX.Element {
       formData[key] = values[key];
     });
     dispatch(loginUserThunk(formData));
-    if (!errorState) {
-      navigate('/user');
-    }
+    navigate('/user');
   };
 
+  const forgetHandler = () => {
+    navigate('/login/forget')
+  }
   const [form] = Form.useForm();
 
   return (
@@ -69,7 +61,7 @@ export default function LoginPage(): JSX.Element {
           <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} htmlType="submit">
             Войти
           </Button>
-          <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}>Забыли пароль?</Button>
+          <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} onClick={forgetHandler}>Забыли пароль?</Button>
         </Space>
         {errorState && <span className="errorMessage">{errorState}</span>}
       </Form>
