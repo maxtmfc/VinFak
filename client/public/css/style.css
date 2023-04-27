@@ -11,9 +11,9 @@ body {
   max-width: none;
 }
 
-/* Main Page */
+/* Main Page + Contacts */
 
-.mainpage {
+.mainpage, .contact {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -28,7 +28,12 @@ body {
   background-image: url('/images/mainPage.jpg');
 }
 
-.mainpage::before {
+.contact {
+  background-image: url('/images/WF-0216.jpg');
+  /* background-image: url('/images/WF-0111.jpg'); */
+}
+
+.mainpage::before, .contact::before {
   content: '';
   display: block;
   position: absolute;
@@ -92,12 +97,26 @@ body {
   background-color: black;
 }
 
+.bonuspageTitile{
+  position: relative;
+  z-index: 2;
+  color: #c2c0ac;
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 2;
+}
 .bonuspageText {
   position: relative;
   z-index: 2;
   color: aliceblue;
   font-size: 30px;
   text-align: center;
+  line-height: 1.5;
+}
+
+.bonuspageText ul{
+  list-style: none;
 }
 
 .bonuspagebutton {
@@ -198,4 +217,13 @@ body {
   position: absolute;
   top: 120px;
   right: 100px;
+}
+
+.section {
+  display: flex;
+  flex-direction: row;
+}
+
+.bonussection {
+  margin: 90px 60px 40px 60px;
 }
