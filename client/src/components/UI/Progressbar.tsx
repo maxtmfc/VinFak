@@ -10,6 +10,7 @@ type ProgressbarProps = {
 };
 
 export default function Progressbar({ userCount, status }: ProgressbarProps): JSX.Element {
+  
   return (
     <div
       className="accountpageText"
@@ -65,7 +66,7 @@ export default function Progressbar({ userCount, status }: ProgressbarProps): JS
           <Progress
             className="my-progress"
             type="circle"
-            percent={(userCount / 20) * 100}
+            percent={Math.round((userCount / 20) * 100)}
             size={150}
             format={customFormat}
             strokeColor="aliceblue"
@@ -78,7 +79,7 @@ export default function Progressbar({ userCount, status }: ProgressbarProps): JS
           <Progress
             className="my-progress"
             type="circle"
-            percent={((userCount - 20) / 50) * 100}
+            percent={Math.round(((userCount - 20) / 50) * 100)}
             size={150}
             format={customFormat}
             strokeColor="aliceblue"
