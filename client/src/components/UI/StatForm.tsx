@@ -36,7 +36,7 @@ export default function StatForm(): JSX.Element {
   const clickHandler = (): void => {
     navigate(-1);
   };
-  const [inputData, setInputData] = React.useState<StatFormType>()!;
+  // const [inputData, setInputData] = React.useState<StatFormType>();
 
   const [form] = Form.useForm();
 
@@ -47,8 +47,8 @@ export default function StatForm(): JSX.Element {
         formData[key] = values[key];
       });
       await dispatch(createNewRecord(formData));
-      success();
-      setInputData(values);
+      success(values);
+      // setInputData(values);
       form.resetFields();
     } catch (error) {
       console.log(error);
@@ -59,14 +59,14 @@ export default function StatForm(): JSX.Element {
     form.setFieldsValue({ title: value });
   };
 
-  const foundUser = allUsers?.find((user) => user.id === inputData?.userId);
-  const foundNickName = foundUser?.nickName;
+  const success = async (values: string | number) => {
+    const foundUser = allUsers?.find((user) => user.id === values?.userId);
+    const foundNickName = foundUser?.nickName;
 
-  const success = () => {
-    Modal.success({
+    await Modal.success({
       title: `Наш студент стал на шаг ближе к цели!`,
       content: `Пользователю ${foundNickName}
-      начислено ${inputData?.count} бокал(-а/ов)`,
+      начислено ${values?.count} бокал(-а/ов)`,
     });
   };
 

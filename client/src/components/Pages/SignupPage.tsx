@@ -119,8 +119,8 @@ export default function SignupPage(): JSX.Element {
           <Input.Password placeholder="Подтвердите пароль" />
         </Form.Item>
         <Space>
-          <Button htmlType="submit">Поступить на факультет</Button>
-          <Button onClick={clickHandler}>Назад</Button>
+          <Button htmlType="submit">ПОСТУПИТЬ НА ФАКУЛЬТЕТ</Button>
+          <Button onClick={clickHandler}>НАЗАД</Button>
         </Space>
       </Form>
     </div>

@@ -1,41 +1,49 @@
-import { Box, TextField } from '@mui/material';
-import { Container } from '@mui/system';
-import { Button } from 'antd';
 import React from 'react';
+import { Modal, Button, Form, Input } from 'antd';
 import { useAppDispatch } from '../../features/redux/hooks';
-import { setEmail } from '../../features/redux/slices/remind/remindSlice';
 import remindPassThunk from '../../features/redux/slices/remind/thunkRemind';
-import type { LoginForm } from '../../types/user/formTypes';
 
 export default function RemindPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    console.log("--------------------");
-    const data = Object.fromEntries(new FormData(event.currentTarget)) as LoginForm;
-    dispatch(remindPassThunk(data));
-  // function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-  //   const email = event.target.value;
-  //   dispatch(setEmail(email));
-  }
+  const handleSubmit = (values: string): void => {
+    const formData = {} as string;
+    Object.keys(values).forEach((key: string) => {
+      formData[key] = values[key];
+    });
+    dispatch(remindPassThunk(formData));
+    success();
+  };
+
+  const success = () => {
+    Modal.success({
+      title: `Письмо отправлено`,
+      content: `На указанную почту выслана ссылка для смены пароля`,
+    });
+  };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        component="form"
-        noValidate
-        onSubmit={handleSubmit}
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
-      >
-        <TextField fullWidth label="Email Adress" name="email" id="email" required autoFocus />
-        {/* <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} type="submit">
-            Отправить
-          </Button> */}
-          <button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} type="submit">
-            Отправить
-          </button>
-      </Box>
-    </Container>
+    <div className="Remind">
+      <Form className="remindForm" onFinish={handleSubmit}>
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              type: 'email',
+              message: 'Не соотвветствует форме E-mail!',
+            },
+            {
+              required: true,
+              message: 'Пожалуйста, введите E-mail!',
+            },
+          ]}
+        >
+          <Input placeholder="Электронная почта" />
+        </Form.Item>
+        <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} htmlType="submit">
+          ОТПРАВИТЬ
+        </Button>
+      </Form>
+    </div>
   );
 }

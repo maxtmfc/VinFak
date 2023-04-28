@@ -23,14 +23,14 @@ export default function ContactsPage(): JSX.Element {
   };
 
   const mapStyle = {
-    width: '500px',
-    height: '90%',
-    borderRadius: '6px',
+    width: '750px',
+    height: '460px',
+    borderRadius: '10px',
   };
 
   const imageStyle = {
-    width: '500px',
-    height: '90%',
+    width: '600px',
+    height: '460px',
     marginLeft: '-25px',
     margin: '0 0 0 100px',
     borderRadius: '10px',
