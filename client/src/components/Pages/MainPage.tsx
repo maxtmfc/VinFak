@@ -18,10 +18,10 @@ export default function MainPage(): JSX.Element {
       <span className="mainpageText" style={{ fontSize: '50px', width: 1300, marginTop: 100 }}>
         Хулиганский винный бар с ретро-антуражем
       </span>
-      <span className="mainpageText" style={{ fontSize: '30px', width: 1300, marginTop: 10 }}>
+      <span className="mainpageText" style={{ color: '#c2c0ac', fontSize: '30px', width: 1300, marginTop: 30 }}>
       Москва, Большой Трехсвятительский переулок, 1
       </span>
-      <span className="mainpageText" style={{ fontSize: '30px', width: 1300, marginTop: 10 }}>
+      <span className="mainpageText" style={{ color: '#c2c0ac', fontSize: '30px', width: 1300, marginTop: 10 }}>
       Телефон: +7 925 645-73-95
       </span>
       <span className="mainpageText" style={{ fontSize: '30px', width: 1300, marginTop: 100 }}>

@@ -12,6 +12,13 @@ export default function LoginPage(): JSX.Element {
   const user = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const error = useAppSelector((store) => store.user.error);
+
+  const [errorState, setErrorState] = useState('');
+
+  useEffect(() => {
+    setErrorState(error);
+  }, [error]);
 
   const submitHandler = (values: string): void => {
     const formData = {} as LoginForm;
@@ -59,9 +66,9 @@ export default function LoginPage(): JSX.Element {
         </Form.Item>
         <Space>
           <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} htmlType="submit">
-            Войти
+            ВОЙТИ
           </Button>
-          <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} onClick={forgetHandler}>Забыли пароль?</Button>
+          <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} onClick={forgetHandler}>ЗАБЫЛИ ПАРОЛЬ?</Button>
         </Space>
         {errorState && <span className="errorMessage">{errorState}</span>}
       </Form>
