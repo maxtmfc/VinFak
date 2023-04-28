@@ -31,7 +31,6 @@ mailerRouter.post("/:uuid", async (req, res) => {
   const { uuid } = req.params;
 
   const checkUUID = await User.findOne({ where: { uuid: uuid } });
-  console.log(checkUUID);
   if (checkUUID) {
     res.sendStatus(200);
   } else {
@@ -44,7 +43,6 @@ mailerRouter.post("/new-pass/:uuid", async (req, res) => {
   const { uuid } = req.params;
   const { password } = req.body;
   const founduuid = await User.findOne({ where: { uuid } });
-  console.log(founduuid, "founduuid =====");
   if (!founduuid) {
     return res.sendStatus(401);
   }

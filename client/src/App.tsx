@@ -24,7 +24,6 @@ import NewPassPage from './components/Pages/NewPassPage';
 
 export default function App(): JSX.Element {
   const user = useAppSelector((store) => store.user);
-  console.log(user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
