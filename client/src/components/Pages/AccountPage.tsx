@@ -40,7 +40,7 @@ export default function AccountPage(): JSX.Element {
 
   const [show, setShow] = useState(false);
   const [input, setInput] = useState<AccountFormType>({
-    nickName: userAccount.nickName,
+    nickName: userAccount?.nickName,
     firstName: userAccount?.firstName,
     lastName: userAccount?.lastName,
     email: userAccount?.email,
