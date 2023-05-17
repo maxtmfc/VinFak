@@ -18,10 +18,12 @@ import AddAdminForm from './components/UI/AddAdminForm';
 import { useAppDispatch, useAppSelector } from './features/redux/hooks';
 import { checkUserThunk } from './features/redux/slices/user/thunkActions';
 import UserStatPage from './components/Pages/UserStatPage';
+import RemindPage from './components/Pages/RemindPage';
+import NewPassPage from './components/Pages/NewPassPage';
+
 
 export default function App(): JSX.Element {
   const user = useAppSelector((store) => store.user);
-  console.log(user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -64,9 +66,19 @@ export default function App(): JSX.Element {
               <Route path="/admin/newadmin" element={<AddAdminForm />} />
             </Route>
             <Route path="/contacts" element={<ContactsPage />} />
-          </Routes>
+            <Route path="/login/forget" element={<RemindPage/>} />  
+        <Route path="/login/forget/:uuid" element={<NewPassPage/>} />
+      </Routes>
         </>
       </Loader>
     </div>
   );
 }
+
+// добавить Роут на страницу с введением нового пароля
+// добавить Роут на на введение email после 'забыли пароль?'
+
+
+// проверить 52 строку с RemindPage
+// проверить 53 строку с NewPassPage
+

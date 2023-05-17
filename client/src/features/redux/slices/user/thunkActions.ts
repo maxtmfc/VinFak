@@ -30,6 +30,10 @@ export const checkUserThunk: ThunkActionCreater = () => (dispatch) => {
     .catch(() => dispatch(logoutUser()));
 };
 
+
+// добавить thunk на uuid + добавить в pages и в ui страницы с кнопками и handler'ами на них 
+// + помнить про то, что, когда клиент будет переходить по ссылке , то создать все правильные пути и помнить про форму с обновлением пароля 
+
 export const logoutThunk: ThunkActionCreater = () => (dispatch) => {
   axios
     .get('/auth/logout')

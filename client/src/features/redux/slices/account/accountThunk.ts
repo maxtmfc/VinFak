@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { AppThunk, ThunkActionCreater } from '../../store';
-import { setUserAccount, editAccount, changeStatus } from './accountSlice';
+import { setUserAccount, editAccount, changeStatus, deleteAccount } from './accountSlice';
 import type {
   UserForAccount,
   AccountFormType,
@@ -34,6 +34,7 @@ export const deleteAccountThunk =
   (dispatch) => {
     axios
       .delete<UserForAccount>(`http://localhost:3001/account/${id}`)
+      .then(() => dispatch(deleteAccount()))
       .then(() => dispatch(logoutUser()))
       .catch(console.log);
   };

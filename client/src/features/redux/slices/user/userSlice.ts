@@ -15,7 +15,6 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<UserType>) => action.payload,
     logoutUser: (state) => ({ ...state, status: 'guest' }),
     setError: (state, action: PayloadAction<string>) =>
-      // console.log(action.payload, 'action.payload =======')
       ({ ...state, error: action.payload }),
   },
 });

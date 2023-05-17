@@ -43,6 +43,7 @@ accountRouter.patch("/changestatus/:id", async (req, res) => {
 });
 
 accountRouter.delete("/:id", async (req, res) => {
+  
   await User.destroy({ where: { id: req.params.id } });
   req.session.destroy();
   res.clearCookie("vinfak_sid");

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createTheme } from '@mui/material/styles';
 import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
@@ -28,6 +28,9 @@ export default function LoginPage(): JSX.Element {
     navigate('/user');
   };
 
+  const forgetHandler = () => {
+    navigate('/login/forget')
+  }
   const [form] = Form.useForm();
 
   return (
@@ -62,9 +65,9 @@ export default function LoginPage(): JSX.Element {
         </Form.Item>
         <Space>
           <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} htmlType="submit">
-            Войти
+            ВОЙТИ
           </Button>
-          <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }}>Забыли пароль?</Button>
+          <Button style={{ fontFamily: 'Fira Sans Condensed, sans-serif' }} onClick={forgetHandler}>ЗАБЫЛИ ПАРОЛЬ?</Button>
         </Space>
         {errorState && <span className="errorMessage">{errorState}</span>}
       </Form>

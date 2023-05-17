@@ -1,7 +1,9 @@
 .Signup,
-.Login {
+.Login,
+.Remind {
   .signuppage,
-  .loginForm {
+  .loginForm,
+  .remindForm {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -19,8 +21,13 @@
     background-image: url('/images/WF-0026.jpg');
   }
 
+  .remindForm {
+    background-image: url('/images/WF-9982.jpg');
+  }
+
   .signuppage:before,
-  .loginForm::before {
+  .loginForm::before,
+  .remindForm::before {
     content: '';
     position: absolute;
     top: 0;
@@ -30,7 +37,8 @@
     background-color: black;
   }
 
-  .signuppage::before {
+  .signuppage::before,
+  .remindForm::before {
     opacity: 0.3;
   }
   .loginForm::before {
@@ -53,6 +61,11 @@
 
   :where(.css-dev-only-do-not-override-1fviqcj).ant-input {
     font-family: 'Fira Sans Condensed', sans-serif;
+    font-size: 22px;
+  }
+
+  :where(.css-dev-only-do-not-override-1fviqcj).ant-input-affix-wrapper {
+    font-size: 22px;
   }
 
   :where(.css-dev-only-do-not-override-1fviqcj).ant-picker
@@ -64,7 +77,7 @@
   }
 
   .ant-btn {
-    width: 220px;
+    width: 250px;
     height: 50px;
     margin: 10px;
     font-size: 18px;

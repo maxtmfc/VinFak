@@ -50,6 +50,9 @@ module.exports = {
           key: "id",
         },
       },
+      uuid: {
+        type:Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

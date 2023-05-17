@@ -15,6 +15,7 @@ module.exports = {
           image: null,
           admin: true,
           statusId: 1,
+          uuid: null,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
