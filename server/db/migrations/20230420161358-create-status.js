@@ -17,6 +17,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      glassTarget: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      period: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      message: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
