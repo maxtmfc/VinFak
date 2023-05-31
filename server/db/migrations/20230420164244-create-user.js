@@ -17,30 +17,28 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      nickName: {
-        type: Sequelize.STRING,
-      },
       email: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
-      oauthId: {
+      telephone: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       hashpass: {
-        allowNull: false,
         type: Sequelize.STRING,
-      },
-      birthDate: {
-        allowNull: false,
-        type: Sequelize.DATE,
       },
       image: {
         type: Sequelize.STRING,
       },
       admin: {
         allowNull: false,
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
+      },
+      statusDate: {
+        type:Sequelize.DATE,
+      },
+      uuid: {
+        type:Sequelize.STRING,
       },
       statusId: {
         allowNull: false,
@@ -49,9 +47,6 @@ module.exports = {
           model: "Statuses",
           key: "id",
         },
-      },
-      uuid: {
-        type:Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

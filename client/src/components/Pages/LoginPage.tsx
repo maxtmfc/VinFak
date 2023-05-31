@@ -13,7 +13,6 @@ export default function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const error = useAppSelector((store) => store.user.error);
-
   const [errorState, setErrorState] = useState('');
 
   useEffect(() => {

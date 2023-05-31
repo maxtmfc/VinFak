@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       title: DataTypes.STRING,
       discount: DataTypes.INTEGER,
+      glassTarget: DataTypes.INTEGER,
+      period: DataTypes.INTEGER,
+      message: DataTypes.TEXT,
     },
     {
       sequelize,
